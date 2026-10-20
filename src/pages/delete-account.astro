@@ -1,0 +1,71 @@
+---
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/layout/Footer.astro";
+
+// App Store / Google Play listings link to this exact URL: keep the path stable.
+// TODO(owner): the link opens support@nafuu.app but shows support@nafuu.cd (same as the old page); confirm which is right.
+---
+
+<BaseLayout
+  title="Supprimer votre compte Nafuu | Demande de suppression des données"
+  description="Comment demander la suppression de votre compte Nafuu et des données personnelles associées : adresse de contact, informations à fournir et délai de traitement."
+>
+  <div class="min-h-screen flex flex-col">
+    <main class="pt-32 pb-24 min-h-screen bg-slate-50">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 md:p-12">
+          <div class="mb-8">
+            <a href="/" class="text-orange-600 hover:text-orange-700 font-medium flex items-center gap-2 transition-colors w-fit">
+              <Icon name="fa6-solid:arrow-left" />
+              Retour à l'accueil
+            </a>
+          </div>
+
+          <h1 class="text-3xl md:text-4xl font-bold text-slate-900 mb-8">Demande de suppression de compte – Nafuu</h1>
+
+          <div class="max-w-none">
+            <p class="text-slate-600 text-lg mb-6">
+              Les utilisateurs peuvent demander la suppression de leur compte Nafuu ainsi que des données personnelles associées à tout moment.
+            </p>
+
+            <h2 class="text-xl font-semibold text-slate-900 mt-10 mb-4">
+              Pour demander la suppression de votre compte, veuillez envoyer un email à :
+            </h2>
+            <p class="text-lg font-medium mb-6">
+              <a href="mailto:support@nafuu.app" class="text-orange-600 hover:text-orange-700 underline">support@nafuu.cd</a>
+            </p>
+
+            <h3 class="text-xl font-semibold text-slate-900 mt-8 mb-4">Veuillez inclure :</h3>
+            <ul class="list-disc pl-6 mb-8 text-slate-600 space-y-2">
+              <li>Votre adresse email utilisée pour le compte</li>
+              <li>Votre numéro de téléphone associé au compte (si applicable)</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-slate-900 mt-8 mb-4">Données qui seront supprimées :</h3>
+            <ul class="list-disc pl-6 mb-8 text-slate-600 space-y-2">
+              <li>Informations du profil utilisateur</li>
+              <li>Historique des commandes</li>
+              <li>Adresses enregistrées</li>
+              <li>Données personnelles associées à votre compte</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-slate-900 mt-8 mb-4">
+              Certaines informations peuvent être conservées temporairement si cela est nécessaire pour :
+            </h3>
+            <ul class="list-disc pl-6 mb-8 text-slate-600 space-y-2">
+              <li>Respecter des obligations légales</li>
+              <li>Prévenir la fraude</li>
+              <li>Respecter des obligations fiscales ou financières</li>
+            </ul>
+
+            <div class="bg-orange-50 border border-orange-200 rounded-xl p-6 mt-10">
+              <p class="text-orange-900 font-medium mb-0">Les demandes de suppression sont traitées dans un délai de 7 jours ouvrables.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>

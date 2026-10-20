@@ -26,7 +26,7 @@ No environment variables are needed.
 
 ```
 src/
-  pages/            one .astro file per route (/, /rider, /restaurant, /about, ...)
+  pages/            one .astro file per route (/, /rider, /restaurant, /about, /delete-account, ...)
   layouts/          BaseLayout (meta, Open Graph, JSON-LD, fonts) and LegalLayout
   components/
     layout/         Navbar, Footer
@@ -49,8 +49,9 @@ vercel.json         redirects from old dashboard URLs, cache headers
 
 The site deploys to Vercel as a static Astro project (`vercel.json`). It also handles the move away from the old all-in-one app:
 
-- **Redirects (301):** `/dashboard/*`, `/restaurant-onboarding`, `/rider-onboarding`, `/restaurant-selection` and `/delete-account` go to the same path on `app.nafuudelivery.com`; `/admin` and `/oauth/authorize` go to `admin.nafuudelivery.com`. Vercel keeps the query string on redirects.
-- **Service-worker kill switch:** the old site installed a PWA service worker at `/sw.js`. `public/sw.js` replaces it: when a returning visitor's browser picks it up, it deletes every cache, unregisters itself and reloads open tabs once. `public/registerSW.js` does the same cleanup from the page. Keep both files deployed for several months.
+- **Redirects (301):** `/dashboard/*`, `/restaurant-onboarding`, `/rider-onboarding` and `/restaurant-selection` go to the same path on `app.nafuudelivery.com`; `/admin/*` and `/oauth/authorize` go to the same path on `admin.nafuudelivery.com`. Vercel keeps the query string on redirects.
+- **`/delete-account` stays on this site:** the App Store and Google Play listings link to that exact URL, so do not move or rename it.
+- **Service-worker kill switch:** the old site installed a PWA service worker at `/sw.js`. `public/sw.js` replaces it: when a returning visitor's browser picks it up, it deletes every cache, unregisters itself and reloads open tabs once. `public/registerSW.js` is an empty no-op that replaces the old registration script, which cached pages of the old app may still request. Keep both files deployed for several months.
 
 ## Contributing
 

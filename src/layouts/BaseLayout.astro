@@ -88,9 +88,6 @@ const imageUrl = new URL(image, site).href;
     <meta name="ICBM" content="1.5583, 30.2497" />
 
     {jsonLd.map((data) => <script type="application/ld+json" set:html={JSON.stringify(data)} />)}
-
-    <!-- Removes the service worker left behind by the old all-in-one PWA (see public/sw.js). -->
-    <script is:inline src="/registerSW.js" defer></script>
   </head>
   <body class={`${bodyClass} selection:bg-orange-100 selection:text-orange-900`}>
     <slot />
