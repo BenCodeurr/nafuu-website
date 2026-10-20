@@ -1,0 +1,303 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+import benMk from "../assets/images/ben_mk.jpg";
+import consommateur from "../assets/images/consommateur.png";
+import restaurantImg from "../assets/images/restaurant_img.avif";
+import deliveryPerson from "../assets/images/delivery_person.png";
+import tech from "../assets/images/tech.png";
+
+// Every section is rendered into the HTML (so search engines index all of it);
+// the script below shows one at a time, like the original page.
+const sections = [
+  { id: "story", label: "Notre Histoire", title: "Notre Histoire", image: benMk, imageClass: "object-top", containerClass: "h-[600px]" },
+  { id: "consumers", label: "Consommateurs", title: "Nos Consommateurs", image: consommateur },
+  { id: "partners", label: "Restaurants", title: "Nos Partenaires", image: restaurantImg },
+  { id: "riders", label: "Livreurs", title: "Nos Livreurs", image: deliveryPerson },
+  { id: "tech", label: "La technologie", title: "Notre tech", image: tech },
+  { id: "values", label: "Nos Valeurs", title: "Nos Valeurs Fondamentales" },
+] as const;
+
+const values = [
+  {
+    title: "On est différents",
+    text: "Livrer à ici, ce n'est pas livrer à Nairobi ou à Lagos. On ne copie pas, on invente. Les contraintes d'ici sont notre terrain de jeu, pas notre excuse. Nous ne sommes pas une copie importée. Chaque décision, chaque fonctionnalité est pensée pour les réalités de chez nous.",
+  },
+  {
+    title: "Simple avant tout",
+    text: "Que ce soit l'app, le tableau de bord ou l'expérience livreur, si ce n'est pas simple, ce n'est pas nafuu. Pour nous la simplicité est la meilleure sophistication.",
+  },
+  {
+    title: "Les gens d'abord",
+    text: "Consommateurs, restaurateurs, livreurs. On ne construit pas pour des chiffres, on construit pour des personnes qui ont des vrais problèmes à résoudre.",
+  },
+  {
+    title: "On fait ce qu'on dit",
+    text: "Pas de promesses creuses. Une commande passée, c'est un repas livré. Un partenaire signé, c'est un engagement tenu.",
+  },
+];
+---
+
+<BaseLayout
+  title="À propos de Nafuu | Notre histoire, nos valeurs"
+  description="Nafuu, « abordable » en swahili : l'application de livraison de repas née à Bunia et construite par GSWORLD pour les réalités des villes africaines."
+>
+  <div class="min-h-screen flex flex-col">
+    <Navbar isDark />
+    <div class="grow">
+      <div class="min-h-screen bg-white">
+        <header class="bg-slate-900 pt-32 pb-20 px-6 md:px-12 relative overflow-hidden h-[400px] flex items-end">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-orange-600/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+          <div class="max-w-7xl mx-auto w-full relative z-10">
+            <h1 class="text-6xl md:text-[100px] font-black text-white tracking-tighter mb-4 leading-none">
+              À propos de <span class="text-orange-600">nous</span>
+            </h1>
+          </div>
+        </header>
+
+        <div data-about>
+          <!-- Sticky mobile section picker -->
+          <div class="lg:hidden sticky top-20 z-40 bg-white/80 backdrop-blur-md border-b border-slate-100 px-6 py-4 flex justify-between items-center shadow-sm">
+            <span class="font-bold text-slate-900 truncate pr-4" data-current-label>{sections[0].label}</span>
+            <button
+              type="button"
+              data-drawer-open
+              aria-controls="about-drawer"
+              aria-expanded="false"
+              class="bg-orange-600 text-white px-4 py-2 rounded-md font-bold text-sm flex items-center gap-2 active:scale-95 transition-all"
+            >
+              <Icon name="fa6-solid:bars" />
+              Sections
+            </button>
+          </div>
+
+          <!-- Mobile drawer -->
+          <div
+            id="about-drawer"
+            data-drawer
+            class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300 lg:hidden opacity-0 pointer-events-none"
+          >
+            <div data-drawer-panel class="absolute bottom-0 left-0 right-0 bg-white rounded-t-[40px] p-8 pb-12 transition-transform duration-500 ease-out transform translate-y-full">
+              <div class="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-8"></div>
+              <p class="text-xl font-black text-slate-900 mb-6 px-2">Navigation</p>
+              <div class="grid gap-2">
+                {
+                  sections.map((section, i) => (
+                    <a
+                      href={`#${section.id}`}
+                      data-section-link={section.id}
+                      aria-current={i === 0 ? "true" : undefined}
+                      class="w-full text-left px-6 py-4 rounded-md font-bold transition-all bg-slate-50 text-slate-600 hover:bg-slate-100 aria-[current=true]:bg-orange-600 aria-[current=true]:text-white aria-[current=true]:shadow-lg"
+                    >
+                      {section.label}
+                    </a>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="max-w-7xl mx-auto px-6 md:px-12 py-10 lg:py-20">
+            <div class="grid lg:grid-cols-12 gap-16">
+              <!-- Desktop sidebar -->
+              <aside class="hidden lg:block lg:col-span-4">
+                <nav class="sticky top-32 space-y-1 border-l border-slate-100" aria-label="Sections">
+                  {
+                    sections.map((section, i) => (
+                      <a
+                        href={`#${section.id}`}
+                        data-section-link={section.id}
+                        aria-current={i === 0 ? "true" : undefined}
+                        class="block w-full text-left px-8 py-5 text-base font-bold transition-all border-l-[4px] -ml-[2px] border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50 aria-[current=true]:border-orange-600 aria-[current=true]:text-orange-600 aria-[current=true]:bg-orange-50/30"
+                      >
+                        {section.label}
+                      </a>
+                    ))
+                  }
+                </nav>
+              </aside>
+
+              <!-- Content -->
+              <main id="content-area" data-content class="lg:col-span-8 transition-all duration-500 ease-out opacity-100 translate-y-0 blur-0">
+                {
+                  sections.map((section, i) => (
+                    <article id={section.id} data-section={section.id} data-label={section.label} hidden={i !== 0} class="bg-white overflow-hidden scroll-mt-40">
+                      <div class="pb-16">
+                        <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-10 tracking-tight leading-tight">{section.title}</h2>
+
+                        {"image" in section && (
+                          <div
+                            class={`mb-12 rounded-3xl overflow-hidden shadow-xl bg-slate-100 border border-slate-100 group ${
+                              "containerClass" in section ? section.containerClass : "max-h-[650px]"
+                            }`}
+                          >
+                            <Image
+                              src={section.image}
+                              alt={section.title}
+                              width={1600}
+                              widths={[800, 1600]}
+                              sizes="(min-width: 1280px) 800px, (min-width: 1024px) 66vw, 100vw"
+                              loading={i === 0 ? "eager" : "lazy"}
+                              class={`w-full h-full object-cover aspect-video group-hover:scale-105 transition-transform duration-1000 ${
+                                "imageClass" in section ? section.imageClass : "object-center"
+                              }`}
+                            />
+                          </div>
+                        )}
+
+                        <div class="text-sm md:text-md text-slate-600 leading-relaxed font-medium">
+                          {section.id === "story" && (
+                            <div class="space-y-6">
+                              <p>
+                                Entre novembre 2022 et septembre 2024, Ben Mukanirwa, l'un de nos co-fondateurs a vécu entre Nairobi, Kigali et Accra. Dans chacune de ces villes, la bonne nourriture était partout, accessible, livrée, à portée de main. De retour à Bunia, la réalité était tout autre. Trouver un repas correct près du bureau de l'ONG où il travaillait comme personnel IT relevait du parcours du combattant.
+                              </p>
+                              <p>Ce contraste a tout déclenché.</p>
+                              <p>
+                                Fondée en 2020, <b>GSWORLD</b> développe des logiciels sur mesure pour les organisations locales, convaincue que la technologie peut et doit répondre aux réalités africaines. Nafuu est l'un de ses projets phares : avec son équipe, ils ont décidé de s'attaquer à un problème du quotidien que tout le monde connaît mais que personne n'avait encore résolu ici.
+                              </p>
+                              <p>
+                                Nafuu, <em>abordable</em> en swahili, est né de cette frustration simple et partagée : pourquoi la bonne nourriture resterait-elle hors de portée pour ceux qui n'ont pas le temps d'aller la chercher ? Conçu pour les villes africaines, pas importé d'ailleurs, mais construit ici, pour ici.
+                              </p>
+                            </div>
+                          )}
+                          {section.id === "consumers" && (
+                            <div class="space-y-6">
+                              <p>Pour vous, avant tout</p>
+                              <p>
+                                On connaît cette sensation. Il est midi, le ventre qui gargouille, une réunion dans 20 minutes, et le resto du coin est trop loin. Ou alors c'est vendredi soir, la famille est là, et personne n'a envie de cuisiner.
+                              </p>
+                              <p>
+                                C'est exactement pour ces moments-là que <b>nafuu</b> existe. Pas de prise de tête, pas de course. Vous ouvrez l'app, vous choisissez ce qui vous fait envie parmi les meilleurs saveurs locales, et vous suivez votre commande en temps réel. Simple, rapide, fiable. Parce que bien manger ne devrait jamais être compliqué.
+                              </p>
+                            </div>
+                          )}
+                          {section.id === "partners" && (
+                            <div class="space-y-6">
+                              <p>
+                                <b>Vos plats méritent d'aller plus loin</b>
+                              </p>
+                              <p>
+                                Vous cuisinez bien. Peut-être même très bien. Mais combien de personnes ne vous ont jamais découvert, simplement parce qu'elles n'ont pas passé votre porte ? <b>nafuu</b> change ça.
+                              </p>
+                              <p>
+                                Que vous soyez un petit restaurant de quartier ou un établissement bien établi, on vous donne accès à une clientèle plus large, sans que vous ayez à lever le petit doigt sur la logistique. Vous cuisinez, on s'occupe du reste.
+                              </p>
+                              <p>
+                                Et ce n'est pas tout. Via votre tableau de bord partenaire, vous voyez ce qui marche, ce qui se commande le plus, quand vos pics d'activité tombent. Des vraies données, pour prendre de vraies décisions.
+                              </p>
+                              <p>
+                                Avec Nafuu, la livraison n'est pas juste un service en plus. C'est un nouveau moteur de croissance pour votre business.
+                              </p>
+                            </div>
+                          )}
+                          {section.id === "riders" && (
+                            <div class="space-y-6">
+                              <p>Sans vous, rien ne bouge. Littéralement.</p>
+                              <p>
+                                Vous n'êtes pas juste des coursiers. Vous êtes des entrepreneurs, des pères et mères de famille, des jeunes qui construisent quelque chose avec leurs propres mains. Chaque course est une opportunité, chaque livraison compte.
+                              </p>
+                              <p>
+                                Chez <b>nafuu</b>, on prend ça au sérieux. Vous choisissez vos horaires, vous travaillez à votre rythme, et vous êtes couvert en cas de pépin. Pas de pression, mais de vraies perspectives.
+                              </p>
+                              <p>
+                                Parce qu'une ville qui mange bien, c'est aussi une ville qui crée des opportunités pour ceux qui la font tourner.
+                              </p>
+                            </div>
+                          )}
+                          {section.id === "tech" && (
+                            <div class="space-y-6">
+                              <p>
+                                On a construit <b>nafuu</b> pour que ça marche chez nous, avec nos réalités locales, point.
+                              </p>
+                              <p>
+                                Quand vous commandez, l'app trouve le livreur le plus proche, calcule le meilleur itinéraire et vous permet de suivre votre commande en direct. Pas de mystère, pas de magie, juste une technologie pensée pour Bunia et ses réalités.
+                              </p>
+                              <p>
+                                Aux restaurants, on donne accès à un tableau de bord simple : voir les commandes entrer, suivre les livraisons, consulter les ventes du jour et comprendre ce que les clients préfèrent commander.
+                              </p>
+                              <p>Et quand le réseau est capricieux ? On a prévu ça aussi.</p>
+                            </div>
+                          )}
+                          {section.id === "values" && (
+                            <div class="grid sm:grid-cols-2 gap-8">
+                              {values.map((value) => (
+                                <div class="bg-slate-50 p-6 rounded-md border border-slate-100">
+                                  <h3 class="font-bold text-orange-600 mb-2">{value.title}</h3>
+                                  <p class="text-sm text-slate-600">{value.text}</p>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </article>
+                  ))
+                }
+              </main>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <Footer />
+  </div>
+</BaseLayout>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-about]");
+  if (root) {
+    const content = root.querySelector<HTMLElement>("[data-content]")!;
+    const sections = Array.from(root.querySelectorAll<HTMLElement>("[data-section]"));
+    const links = Array.from(root.querySelectorAll<HTMLAnchorElement>("[data-section-link]"));
+    const label = root.querySelector<HTMLElement>("[data-current-label]");
+    const drawer = root.querySelector<HTMLElement>("[data-drawer]")!;
+    const drawerPanel = root.querySelector<HTMLElement>("[data-drawer-panel]")!;
+    const drawerButton = root.querySelector<HTMLButtonElement>("[data-drawer-open]")!;
+    let active = sections[0]?.dataset.section;
+
+    const setDrawer = (open: boolean) => {
+      drawer.classList.toggle("opacity-0", !open);
+      drawer.classList.toggle("pointer-events-none", !open);
+      drawerPanel.classList.toggle("translate-y-full", !open);
+      drawerButton.setAttribute("aria-expanded", String(open));
+    };
+
+    const show = (id: string, animate: boolean) => {
+      if (!sections.some((s) => s.dataset.section === id)) return;
+      const apply = () => {
+        active = id;
+        sections.forEach((s) => (s.hidden = s.dataset.section !== id));
+        links.forEach((l) => (l.dataset.sectionLink === id ? l.setAttribute("aria-current", "true") : l.removeAttribute("aria-current")));
+        if (label) label.textContent = sections.find((s) => s.dataset.section === id)?.dataset.label ?? "";
+        content.classList.remove("opacity-0", "translate-y-4", "blur-sm");
+      };
+      if (!animate) return apply();
+      content.classList.add("opacity-0", "translate-y-4", "blur-sm");
+      setTimeout(() => {
+        apply();
+        setDrawer(false);
+        window.scrollTo({ top: 400, behavior: "smooth" });
+      }, 300);
+    };
+
+    links.forEach((link) =>
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        const id = link.dataset.sectionLink!;
+        if (id === active) return setDrawer(false);
+        history.replaceState(null, "", `#${id}`);
+        show(id, true);
+      }),
+    );
+    drawerButton.addEventListener("click", () => setDrawer(true));
+    drawer.addEventListener("click", (event) => {
+      if (!drawerPanel.contains(event.target as Node)) setDrawer(false);
+    });
+
+    // Deep links such as /about#values open that section directly.
+    if (location.hash) show(location.hash.slice(1), false);
+  }
+</script>

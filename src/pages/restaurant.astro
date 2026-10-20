@@ -1,0 +1,314 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/layout/Footer.astro";
+import { LINKS } from "../data/site";
+import restaurantImg from "../assets/images/restaurant_img.avif";
+import wideCustomer from "../assets/images/wide-customer.png";
+import deliveryDash from "../assets/images/delivery-dash.png";
+import dashboard from "../assets/images/dashboard.png";
+import newOrder from "../assets/images/new-order.avif";
+
+const tabs = [
+  {
+    id: "customers",
+    title: "Touchez des clients exclusifs",
+    desc: "Accédez à une nouvelle base de clients qui commandent régulièrement. Nafuu est l'application préférée pour découvrir de nouvelles saveurs, ce qui signifie plus de commandes pour votre cuisine.",
+    image: wideCustomer,
+    icon: "fa6-solid:users",
+  },
+  {
+    id: "operations",
+    title: "Gérez facilement vos livraisons",
+    desc: "Utilisez notre technologie intuitive pour suivre chaque commande en temps réel. De la préparation à l'affectation du livreur, gardez un contrôle total sur le flux de travail de votre restaurant.",
+    image: deliveryDash,
+    icon: "fa6-solid:laptop-code",
+  },
+  {
+    id: "growth",
+    title: "Accélérez la croissance de votre entreprise",
+    desc: "Exploitez les données pour comprendre les préférences de vos clients. Nos outils marketing et nos rapports de performance vous aident à optimiser votre menu et à augmenter vos revenus.",
+    image: dashboard,
+    icon: "fa6-solid:chart-line",
+  },
+];
+
+const perks = ["Plus de clients", "Analyses en temps réel", "Commandes reçues sur WhatsApp", "Support 24/7"];
+
+// Tab button styles: [data-selected] is toggled by the script below.
+const tabButton =
+  "w-full p-8 rounded-md text-left transition-all duration-500 flex items-center gap-6 border-2 group/tab bg-transparent border-transparent hover:bg-white/50 text-slate-400 opacity-40 hover:opacity-100 aria-selected:bg-white aria-selected:border-orange-500 aria-selected:shadow-xl aria-selected:scale-105 aria-selected:opacity-100";
+---
+
+<BaseLayout
+  title="Inscrire votre restaurant sur Nafuu | Livraison de repas à Bunia"
+  description="Faites grandir votre restaurant avec Nafuu : de nouveaux clients, la livraison prise en charge, les commandes sur WhatsApp et un tableau de bord pour suivre vos ventes."
+  bodyClass="bg-white text-slate-900"
+>
+  <div class="min-h-screen flex flex-col">
+    <div class="bg-white">
+      <!-- Restaurant navbar -->
+      <nav
+        data-scroll-state
+        class="fixed top-4 left-4 right-4 z-50 flex items-center px-4 sm:px-6 md:px-12 transition-all duration-500 rounded-2xl bg-transparent py-6 md:py-8 data-[scrolled=true]:bg-white/80 data-[scrolled=true]:backdrop-blur-lg data-[scrolled=true]:shadow-lg data-[scrolled=true]:border data-[scrolled=true]:border-slate-200/50 data-[scrolled=true]:py-3"
+        aria-label="Navigation restaurants"
+      >
+        <div class="flex-1 flex items-center justify-start h-full">
+          <a
+            href={LINKS.restaurantSignup}
+            class="hidden lg:block px-6 py-3 rounded-md font-bold shadow-lg transition-all active:scale-95 bg-orange-600 text-white hover:bg-orange-700 text-sm whitespace-nowrap"
+          >
+            Devenir partenaire
+          </a>
+          <a href="/" class="lg:hidden p-2 text-orange-600" aria-label="Retour à l'accueil">
+            <Icon name="fa6-solid:arrow-left" class="text-xl" />
+          </a>
+        </div>
+
+        <a href="/" class="flex-shrink-0 flex items-center justify-center group" aria-label="Nafuu, accueil">
+          <img src="/images/logo_nafuu_black.png" alt="Nafuu Logo" width="813" height="378" class="h-5 sm:h-6 w-auto group-hover:scale-105 transition-transform" />
+          <span class="text-orange-600 font-medium text-base sm:text-lg ml-2 sm:ml-3 transition-colors duration-500 hidden sm:inline-block">Restaurants</span>
+        </a>
+
+        <div class="flex-1 flex justify-end h-full">
+          <a
+            href={LINKS.restaurantLogin}
+            class="px-4 sm:px-6 py-2.5 sm:py-3 rounded-md font-bold transition-all text-xs sm:text-sm active:scale-95 border-2 whitespace-nowrap text-orange-600 border-orange-600 hover:bg-white"
+          >
+            Espace Restaurant
+          </a>
+        </div>
+      </nav>
+
+      <main>
+        <!-- Hero -->
+        <section class="relative min-h-[90vh] flex items-center pt-32 overflow-hidden" data-reveal-group>
+          <div class="absolute top-0 right-0 w-1/3 h-full bg-orange-50 -z-10 rounded-bl-[200px] hidden lg:block"></div>
+          <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+            <div data-reveal="up">
+              <h1 class="text-5xl md:text-7xl font-black text-slate-900 leading-[0.95] mb-8">
+                Faites grandir votre <span class="text-orange-600">restaurant</span> avec nous
+              </h1>
+              <p class="text-[16px] text-slate-600 mb-10 leading-relaxed max-w-xl">
+                Rejoignez les restaurants qui augmentent déjà leurs revenus en livrant leurs plats préférés à des clients affamés partout en ville.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4">
+                <a href={LINKS.restaurantSignup} class="bg-orange-600 text-white px-8 py-4 rounded-md text-base font-normal shadow-xl hover:bg-orange-700 hover:scale-105 transition-all text-center">
+                  Devenir partenaire
+                </a>
+              </div>
+            </div>
+            <div class="relative delay-300" data-reveal="zoom">
+              <div class="relative z-10 rounded-[40px] overflow-hidden shadow-2xl border-[12px] border-white rotate-3 group hover:rotate-0 transition-transform duration-700">
+                <Image
+                  src={restaurantImg}
+                  alt="Chef préparant un plat"
+                  width={1200}
+                  widths={[600, 1200]}
+                  sizes="(min-width: 1024px) 600px, 100vw"
+                  loading="eager"
+                  fetchpriority="high"
+                  class="w-full h-full object-cover aspect-[4/5]"
+                />
+              </div>
+              <div class="absolute -bottom-10 -left-2 sm:-left-10 bg-white p-6 rounded-md shadow-2xl border border-slate-100 z-20 animate-bounce">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 bg-green-100 rounded-md flex items-center justify-center text-green-600">
+                    <Icon name="fa6-solid:chart-line" />
+                  </div>
+                  <div>
+                    <p class="text-xs text-slate-500 font-bold uppercase tracking-tighter">Croissance</p>
+                    <p class="text-lg font-black text-slate-900">Suivi de performance</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Why choose Nafuu (tabs) -->
+        <section class="py-32 bg-slate-50 overflow-hidden">
+          <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+              <h2 class="text-4xl md:text-6xl font-black text-slate-900 mb-6">Pourquoi choisir Nafuu ?</h2>
+              <p class="text-md text-slate-600 max-w-2xl mx-auto">
+                Nous fournissons les outils et l'audience dont vous avez besoin pour passer au niveau supérieur.
+              </p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-12" data-tabs>
+              <div class="lg:col-span-4 space-y-4" role="tablist" aria-label="Avantages Nafuu">
+                {
+                  tabs.map((tab, i) => (
+                    <button
+                      type="button"
+                      role="tab"
+                      id={`tab-${tab.id}`}
+                      aria-controls={`panel-${tab.id}`}
+                      aria-selected={i === 0 ? "true" : "false"}
+                      tabindex={i === 0 ? 0 : -1}
+                      class={tabButton}
+                    >
+                      <div class="w-14 h-14 shrink-0 rounded-md flex items-center justify-center text-2xl transition-all duration-500 bg-slate-200 text-slate-400 group-hover/tab:scale-105 group-aria-selected/tab:bg-orange-600 group-aria-selected/tab:text-white group-aria-selected/tab:scale-110 group-aria-selected/tab:shadow-lg">
+                        <Icon name={tab.icon} />
+                      </div>
+                      <div>
+                        <h3 class="font-black text-lg transition-colors duration-300 text-slate-400 group-hover/tab:text-slate-600 group-aria-selected/tab:text-slate-900">
+                          {tab.title}
+                        </h3>
+                      </div>
+                    </button>
+                  ))
+                }
+              </div>
+
+              {
+                tabs.map((tab, i) => (
+                  <div
+                    role="tabpanel"
+                    id={`panel-${tab.id}`}
+                    aria-labelledby={`tab-${tab.id}`}
+                    hidden={i !== 0}
+                    class="lg:col-span-8 bg-white rounded-[40px] overflow-hidden shadow-2xl border border-slate-100 flex flex-col md:flex-row min-h-[500px] animate-tab-switch"
+                  >
+                    <div class="md:w-1/2 p-12 flex flex-col justify-center">
+                      <h3 class="text-3xl font-black text-slate-900 mb-6">{tab.title}</h3>
+                      <p class="text-md text-slate-600 leading-relaxed mb-8">{tab.desc}</p>
+                    </div>
+                    <div class="md:w-1/2 relative overflow-hidden">
+                      <Image
+                        src={tab.image}
+                        alt={tab.title}
+                        width={960}
+                        widths={[480, 960]}
+                        sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+                        class="w-full h-full object-cover"
+                      />
+                      <div class="absolute inset-0 bg-orange-600/10" />
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+
+        <!-- Service -->
+        <section class="py-32 bg-white overflow-hidden">
+          <div class="max-w-7xl mx-auto px-6">
+            <div class="bg-slate-900 rounded-[60px] p-8 md:p-20 relative">
+              <div class="absolute top-0 right-0 w-64 h-64 bg-orange-600/10 rounded-full blur-[100px]"></div>
+              <div class="absolute bottom-0 left-0 w-64 h-64 bg-teal-600/10 rounded-full blur-[100px]"></div>
+
+              <div class="grid lg:grid-cols-2 gap-16 items-center relative z-10">
+                <div class="space-y-8">
+                  <h2 class="text-4xl md:text-5xl font-black text-white leading-tight">
+                    Nous sommes là, de la préparation de la commande à la livraison à domicile
+                  </h2>
+                  <p class="text-md text-slate-400 leading-relaxed">
+                    En vous inscrivant, votre entreprise apparaîtra devant des milliers de clients sur notre application. Nous vous fournirons la technologie en magasin pour gérer facilement vos commandes, et l'accès à notre Espace Partenaire pour suivre vos performances, ajuster vos offres et booster votre chiffre d'affaires.
+                  </p>
+                  <div class="flex flex-wrap gap-8 py-6">
+                    {
+                      perks.map((perk) => (
+                        <div class="flex items-center gap-3 text-white">
+                          <Icon name="fa6-solid:circle-check" class="text-teal-400 text-xl" />
+                          <span class="font-bold">{perk}</span>
+                        </div>
+                      ))
+                    }
+                  </div>
+                  <a
+                    href={LINKS.restaurantSignup}
+                    class="inline-block bg-orange-600 text-white px-10 py-5 rounded-md text-md shadow-xl hover:bg-orange-700 transition-all hover:scale-105 active:scale-95"
+                  >
+                    Devenir partenaire
+                  </a>
+                </div>
+
+                <div class="relative">
+                  <div class="relative rounded-[40px] overflow-hidden border-8 border-slate-800 shadow-2xl">
+                    <Image src={newOrder} alt="Processus de préparation" width={1200} widths={[600, 1200]} sizes="(min-width: 1024px) 560px, 100vw" class="w-full h-full object-cover aspect-video" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+                  </div>
+                  <div class="absolute -top-6 -right-2 sm:-right-6 bg-white p-4 rounded-md shadow-2xl flex items-center gap-3">
+                    <div class="w-10 h-10 bg-orange-100 rounded-md flex items-center justify-center text-orange-600">
+                      <Icon name="fa6-solid:bell" />
+                    </div>
+                    <p class="text-sm font-black text-slate-900">Nouvelle commande !</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer CTA -->
+        <section class="py-24 bg-orange-600 relative overflow-hidden">
+          <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl md:text-6xl font-black text-white mb-10 leading-tight">
+              Prêt à booster vos <br /> revenus dès maintenant ?
+            </h2>
+            <a
+              href={LINKS.restaurantSignup}
+              class="inline-block animate-subtle-pulse bg-white text-orange-600 px-12 py-6 rounded-md text-2xl font-black shadow-2xl hover:bg-slate-50 transition-all active:scale-95 ring-4 ring-white/20"
+            >
+              Inscrivez votre restaurant
+            </a>
+            <p class="mt-8 text-white/80 font-medium">Rejoignez Nafuu aujourd'hui.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+    <Footer />
+  </div>
+</BaseLayout>
+
+<style>
+  @keyframes tab-switch {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .animate-tab-switch {
+    animation: tab-switch 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+  .animate-tab-switch[hidden] {
+    display: none;
+  }
+  @keyframes subtle-pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+    70% { transform: scale(1.03); box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+  }
+  .animate-subtle-pulse {
+    animation: subtle-pulse 2.5s infinite;
+  }
+</style>
+
+<script>
+  // Accessible tabs: click or arrow keys switch the visible panel.
+  document.querySelectorAll<HTMLElement>("[data-tabs]").forEach((root) => {
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+    const select = (tab: HTMLButtonElement) => {
+      for (const t of tabs) {
+        const selected = t === tab;
+        t.setAttribute("aria-selected", String(selected));
+        t.tabIndex = selected ? 0 : -1;
+        const panel = document.getElementById(t.getAttribute("aria-controls") ?? "");
+        if (panel) panel.hidden = !selected;
+      }
+    };
+    tabs.forEach((tab, i) => {
+      tab.addEventListener("click", () => select(tab));
+      tab.addEventListener("keydown", (event) => {
+        const delta = event.key === "ArrowDown" || event.key === "ArrowRight" ? 1 : event.key === "ArrowUp" || event.key === "ArrowLeft" ? -1 : 0;
+        if (!delta) return;
+        event.preventDefault();
+        const next = tabs[(i + delta + tabs.length) % tabs.length];
+        select(next);
+        next.focus();
+      });
+    });
+  });
+</script>

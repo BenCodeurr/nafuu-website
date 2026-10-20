@@ -1,0 +1,102 @@
+---
+import "@fontsource-variable/inter";
+import "../styles/global.css";
+import ScrollTopButton from "../components/ui/ScrollTopButton.astro";
+
+interface Props {
+  /** Full <title>; also used for og:title / twitter:title. */
+  title: string;
+  description: string;
+  /** Path of the page ("/about"); the canonical URL is built from `site`. */
+  path?: string;
+  /** Absolute or root-relative social preview image. */
+  image?: string;
+  imageAlt?: string;
+  /** Structured data objects, emitted as <script type="application/ld+json">. */
+  jsonLd?: Record<string, unknown>[];
+  /** Hide the floating "back to top" button (e.g. on short pages). */
+  hideScrollTop?: boolean;
+  /** Keep the page out of search results (404). */
+  noindex?: boolean;
+  bodyClass?: string;
+}
+
+const {
+  title,
+  description,
+  path = Astro.url.pathname,
+  image = "/images/og-image.jpg",
+  imageAlt = "Nafuu — Livraison de repas à Bunia, RDC",
+  jsonLd = [],
+  hideScrollTop = false,
+  noindex = false,
+  bodyClass = "bg-slate-50 text-slate-900",
+} = Astro.props;
+
+const site = Astro.site ?? new URL("https://nafuudelivery.com");
+const normalizedPath = path === "/" ? "/" : path.replace(/\/+$/, "");
+const canonical = new URL(normalizedPath, site).href;
+const imageUrl = new URL(image, site).href;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>document.documentElement.classList.add("js");</script>
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="GSWORLD" />
+    <meta
+      name="robots"
+      content={noindex ? "noindex, follow" : "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"}
+    />
+    <meta name="theme-color" content="#ff6b00" />
+    {!noindex && <link rel="canonical" href={canonical} />}
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nafuu" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta property="og:locale" content="fr_CD" />
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+    <meta name="twitter:site" content="@nafuu_cd" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png" />
+    <link rel="apple-touch-icon" href="/images/favicon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Local SEO: Bunia, Ituri (RDC) -->
+    <meta name="geo.region" content="CD-IT" />
+    <meta name="geo.placename" content="Bunia, Ituri, République Démocratique du Congo" />
+    <meta name="geo.position" content="1.5583;30.2497" />
+    <meta name="ICBM" content="1.5583, 30.2497" />
+
+    {jsonLd.map((data) => <script type="application/ld+json" set:html={JSON.stringify(data)} />)}
+
+    <!-- Removes the service worker left behind by the old all-in-one PWA (see public/sw.js). -->
+    <script is:inline src="/registerSW.js" defer></script>
+  </head>
+  <body class={`${bodyClass} selection:bg-orange-100 selection:text-orange-900`}>
+    <slot />
+    {!hideScrollTop && <ScrollTopButton />}
+    <script>
+      import "../scripts/ui";
+    </script>
+  </body>
+</html>

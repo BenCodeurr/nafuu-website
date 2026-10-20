@@ -1,0 +1,202 @@
+---
+import { Icon } from "astro-icon/components";
+import { LINKS } from "../../data/site";
+
+interface Props {
+  /** Light text over a dark hero until the page is scrolled. */
+  isDark?: boolean;
+}
+
+const { isDark = false } = Astro.props;
+
+const partnerLinks = [
+  { href: "/rider", icon: "fa6-solid:motorcycle", title: "Livreurs", subtitle: "Gagnez en roulant" },
+  { href: "/restaurant", icon: "fa6-solid:store", title: "Restaurants", subtitle: "Inscrivez votre restaurant" },
+  { href: "/entreprises", icon: "fa6-solid:briefcase", title: "Nafuu Entreprises", subtitle: "Solutions repas B2B" },
+];
+
+// Colours before scrolling depend on the hero behind the bar; once scrolled the bar is always light.
+const textColor = isDark
+  ? "text-white group-data-[scrolled=true]/nav:text-slate-900"
+  : "text-slate-900";
+const ctaColor = isDark
+  ? "text-white border-white"
+  : "text-orange-600 border-orange-600";
+---
+
+<header class="group/nav" data-scroll-state data-scrolled="false">
+  <nav
+    class="fixed top-4 left-4 right-4 z-50 transition-all duration-500 ease-in-out h-20 md:h-24 flex items-center rounded-2xl bg-transparent group-data-[scrolled=true]/nav:bg-white/80 group-data-[scrolled=true]/nav:backdrop-blur-lg group-data-[scrolled=true]/nav:shadow-lg group-data-[scrolled=true]/nav:border group-data-[scrolled=true]/nav:border-slate-200/50 group-data-[scrolled=true]/nav:h-16 md:group-data-[scrolled=true]/nav:h-20"
+    aria-label="Navigation principale"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between md:justify-center items-center md:gap-12 lg:gap-24">
+      <!-- Devenez Partenaire (desktop, left of logo) -->
+      <div class="hidden md:flex relative group items-center h-full">
+        <button
+          type="button"
+          class={`flex items-center gap-2 font-bold transition-all focus:outline-none hover:text-orange-600 ${textColor}`}
+          aria-haspopup="true"
+        >
+          Devenez Partenaire
+          <Icon name="fa6-solid:chevron-down" class="text-[10px] transition-transform duration-300 group-hover:rotate-180" />
+        </button>
+
+        <div class="absolute top-full left-1/2 -translate-x-1/2 w-72 mt-2 bg-white shadow-2xl rounded-md p-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 transform translate-y-4 group-hover:translate-y-0 border border-slate-100">
+          {
+            partnerLinks.map((link, i) => (
+              <a
+                href={link.href}
+                class:list={[
+                  "w-full text-left p-3 hover:bg-orange-50 rounded-md transition-all flex items-center gap-4 group/item",
+                  i > 0 && "mt-1",
+                ]}
+              >
+                <div class="w-10 h-10 bg-orange-100 rounded-md flex items-center justify-center text-orange-600 transition-all group-hover/item:bg-orange-600 group-hover/item:text-white">
+                  <Icon name={link.icon} />
+                </div>
+                <div>
+                  <p class="font-bold text-slate-900 text-sm">{link.title}</p>
+                  <p class="text-[11px] text-slate-500">{link.subtitle}</p>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Logo (centre) -->
+      <a href="/" aria-label="Nafuu, accueil" class="flex items-center group outline-none">
+        {
+          isDark && (
+            <img
+              src="/images/logo_nafuu_white.png"
+              alt="Nafuu Logo"
+              width="813"
+              height="378"
+              class="transition-all duration-500 group-hover:scale-110 h-6 w-auto group-data-[scrolled=true]/nav:hidden"
+            />
+          )
+        }
+        <img
+          src="/images/logo_nafuu_black.png"
+          alt="Nafuu Logo"
+          width="813"
+          height="378"
+          class:list={[
+            "transition-all duration-500 group-hover:scale-110 h-6 w-auto",
+            isDark && "hidden group-data-[scrolled=true]/nav:block",
+          ]}
+        />
+      </a>
+
+      <!-- Espace Restaurant (desktop, right of logo) -->
+      <a
+        href={LINKS.restaurantLogin}
+        class={`hidden md:block px-6 py-2.5 rounded-md font-bold transition-all text-sm active:scale-95 border-2 hover:bg-white hover:text-orange-600 ${ctaColor} group-data-[scrolled=true]/nav:text-white group-data-[scrolled=true]/nav:bg-orange-600 group-data-[scrolled=true]/nav:border-orange-600 group-data-[scrolled=true]/nav:hover:bg-orange-700`}
+      >
+        Espace Restaurant
+      </a>
+
+      <!-- Mobile menu toggle -->
+      <button
+        type="button"
+        id="mobile-menu-toggle"
+        class={`md:hidden p-2 focus:outline-none transition-all duration-200 ${textColor}`}
+        aria-label="Ouvrir le menu mobile"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <Icon name="fa6-solid:bars" class="text-2xl" data-menu-icon="open" />
+        <Icon name="fa6-solid:xmark" class="text-2xl hidden" data-menu-icon="close" />
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu overlay -->
+  <div
+    id="mobile-menu-overlay"
+    class="fixed inset-0 z-40 md:hidden transition-all duration-300 opacity-0 pointer-events-none"
+    aria-hidden="true"
+    style="background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(4px)"
+  >
+  </div>
+
+  <!-- Mobile menu panel -->
+  <div
+    id="mobile-menu"
+    class="fixed top-0 left-0 right-0 z-[45] md:hidden transition-all duration-300 ease-in-out opacity-0 -translate-y-4 pointer-events-none"
+    style="padding-top: 6rem"
+  >
+    <div class="mx-4 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden">
+      <details class="group/partner">
+        <summary class="w-full flex items-center justify-between p-4 font-bold text-slate-900 hover:bg-orange-50 transition-all cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+          <span class="flex items-center gap-3">
+            <span class="w-9 h-9 bg-orange-100 rounded-lg flex items-center justify-center text-orange-600">
+              <Icon name="fa6-solid:handshake" class="text-sm" />
+            </span>
+            Devenez Partenaire
+          </span>
+          <Icon name="fa6-solid:chevron-down" class="text-orange-600 text-sm transition-transform duration-300 group-open/partner:rotate-180" />
+        </summary>
+        <div class="px-4 pb-2 flex flex-col gap-1">
+          {
+            partnerLinks.map((link) => (
+              <a href={link.href} class="w-full text-left p-3 hover:bg-orange-50 rounded-xl transition-all flex items-center gap-4">
+                <div class="w-9 h-9 bg-orange-100 rounded-lg flex items-center justify-center text-orange-600">
+                  <Icon name={link.icon} class="text-sm" />
+                </div>
+                <div>
+                  <p class="font-bold text-slate-900 text-sm">{link.title}</p>
+                  <p class="text-xs text-slate-500">{link.subtitle}</p>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </details>
+
+      <div class="mx-4 h-px bg-slate-100"></div>
+
+      <div class="p-4">
+        <a
+          href={LINKS.restaurantLogin}
+          class="w-full py-3 px-6 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2"
+        >
+          <Icon name="fa6-solid:utensils" />
+          Espace Restaurant
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("mobile-menu-toggle");
+  const panel = document.getElementById("mobile-menu");
+  const overlay = document.getElementById("mobile-menu-overlay");
+
+  if (toggle && panel && overlay) {
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu mobile");
+      toggle.querySelector('[data-menu-icon="open"]')?.classList.toggle("hidden", open);
+      toggle.querySelector('[data-menu-icon="close"]')?.classList.toggle("hidden", !open);
+      panel.classList.toggle("opacity-0", !open);
+      panel.classList.toggle("-translate-y-4", !open);
+      panel.classList.toggle("pointer-events-none", !open);
+      overlay.classList.toggle("opacity-0", !open);
+      overlay.classList.toggle("pointer-events-none", !open);
+      document.body.style.overflow = open ? "hidden" : "";
+      if (!open) panel.querySelector("details")?.removeAttribute("open");
+    };
+
+    toggle.addEventListener("click", () => setOpen(toggle.getAttribute("aria-expanded") !== "true"));
+    overlay.addEventListener("click", () => setOpen(false));
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 768) setOpen(false);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setOpen(false);
+    });
+  }
+</script>

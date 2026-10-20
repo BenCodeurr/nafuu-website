@@ -1,0 +1,88 @@
+---
+import { Image } from "astro:assets";
+import StoreButtons from "../ui/StoreButtons.astro";
+import food1 from "../../assets/images/food-image-1.avif";
+import food2 from "../../assets/images/food-image-2.avif";
+import food3 from "../../assets/images/food-image-3.avif";
+import food4 from "../../assets/images/food-image-4.avif";
+import food5 from "../../assets/images/food-image-5.avif";
+import food6 from "../../assets/images/food-image-6.avif";
+import food7 from "../../assets/images/food-image-7.avif";
+
+const column1 = [food1, food2, food3, food4];
+const column2 = [food4, food5, food6, food7];
+---
+
+<section class="bg-slate-900 py-24 overflow-hidden relative min-h-[600px] flex items-center">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Left content -->
+      <div class="z-10">
+        <h2 class="text-5xl md:text-7xl font-black text-white leading-[1.1] mb-8 tracking-tighter">
+          Cuisine de <span class="text-orange-500">Qualité</span>.<br />
+          Livraison sans <span class="text-orange-500">Stress</span>.
+        </h2>
+
+        <p class="text-[16px] text-slate-400 mb-10 max-w-lg leading-relaxed">
+          Le meilleur de la gastronomie congolaise et internationale, livré avec soin là où vous êtes.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <StoreButtons variant="light" />
+        </div>
+      </div>
+
+      <!-- Right content: animated scrolling columns (decorative) -->
+      <div class="relative h-[600px] hidden lg:grid grid-cols-2 gap-6 mask-fade-edges" aria-hidden="true">
+        <div class="flex flex-col gap-6 animate-v-scroll-up">
+          {
+            [...column1, ...column1].map((img) => (
+              <div class="aspect-4/5 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-800">
+                <Image src={img} alt="" width={300} densities={[1, 2]} loading="lazy" class="w-full h-full object-cover" />
+              </div>
+            ))
+          }
+        </div>
+        <div class="flex flex-col gap-6 animate-v-scroll-down">
+          {
+            [...column2, ...column2].map((img) => (
+              <div class="aspect-4/5 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-800">
+                <Image src={img} alt="" width={300} densities={[1, 2]} loading="lazy" class="w-full h-full object-cover" />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mask-fade-edges {
+    mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  }
+
+  @keyframes v-scroll-up {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+
+  @keyframes v-scroll-down {
+    0% { transform: translateY(-50%); }
+    100% { transform: translateY(0); }
+  }
+
+  .animate-v-scroll-up {
+    animation: v-scroll-up 30s linear infinite;
+  }
+
+  .animate-v-scroll-down {
+    animation: v-scroll-down 30s linear infinite;
+  }
+
+  .animate-v-scroll-up:hover,
+  .animate-v-scroll-down:hover {
+    animation-play-state: paused;
+  }
+</style>

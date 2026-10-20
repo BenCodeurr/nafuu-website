@@ -1,0 +1,89 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+import Hero from "../components/sections/Hero.astro";
+import CravingsSection from "../components/sections/CravingsSection.astro";
+import EasyDelivery from "../components/sections/EasyDelivery.astro";
+import PartnerSections from "../components/sections/PartnerSections.astro";
+import { CONTACT, SITE_URL } from "../data/site";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "nafuu",
+    url: SITE_URL,
+    logo: `${SITE_URL}/images/logo-orange-bg.png`,
+    description:
+      "Application de livraison de repas à Bunia, RDC. Nafuu connecte les consommateurs aux meilleurs restaurants locaux.",
+    foundingDate: "2025",
+    founders: [{ "@type": "Person", name: "Ben Mukanirwa" }],
+    parentOrganization: { "@type": "Organization", name: "GSWORLD", url: "https://gsworld.cd" },
+    areaServed: {
+      "@type": "City",
+      name: "Bunia",
+      containedInPlace: { "@type": "Country", name: "République Démocratique du Congo" },
+    },
+    sameAs: [
+      "https://www.facebook.com/nafuudelivery",
+      "https://www.linkedin.com/company/nafuudelivery/",
+      "https://www.tiktok.com/@nafuudelivery",
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    name: "Nafuu",
+    operatingSystem: "Android, iOS",
+    applicationCategory: "FoodDelivery",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "CDF" },
+    description:
+      "Commandez vos repas préférés à Bunia et faites-vous livrer en quelques minutes avec l'application Nafuu.",
+    installUrl: [
+      "https://apps.apple.com/app/nafuu-livraison-des-repas/id6781988366",
+      "https://play.google.com/store/apps/details?id=com.nafuu.nafuu",
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Nafuu",
+    image: `${SITE_URL}/images/og-image.jpg`,
+    url: SITE_URL,
+    telephone: `+${CONTACT.whatsapp.phone}`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Bunia",
+      addressRegion: "Ituri",
+      addressCountry: "CD",
+    },
+    geo: { "@type": "GeoCoordinates", latitude: 1.5583, longitude: 30.2497 },
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "08:00",
+      closes: "22:00",
+    },
+    priceRange: "$$",
+  },
+];
+---
+
+<BaseLayout
+  title="Nafuu | Vos plats préférés livrés chez vous"
+  description="Nafuu livre vos plats préférés en quelques minutes à Bunia. Commandez chez les meilleurs restaurants et suivez votre livraison en temps réel. Téléchargez l'app."
+  path="/"
+  jsonLd={jsonLd}
+>
+  <div class="min-h-screen flex flex-col">
+    <Navbar />
+    <main class="grow">
+      <Hero />
+      <CravingsSection />
+      <EasyDelivery />
+      <PartnerSections />
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>

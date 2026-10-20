@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/layout/Footer.astro";
+import ComingSoon from "../components/ui/ComingSoon.astro";
+---
+
+<BaseLayout
+  title="Carrières chez Nafuu | Rejoindre l'équipe"
+  description="Les offres d'emploi chez Nafuu, l'application de livraison de repas à Bunia. Nous ne recrutons pas pour l'instant, mais peut-être bientôt."
+>
+  <div class="min-h-screen flex flex-col">
+    <main class="grow">
+      <ComingSoon class="min-h-[80vh]">
+        <Fragment slot="title">Les jobs</Fragment>
+        Nous ne recrutons pas pour l'instant. <br /> Mais peut-être bientôt.
+      </ComingSoon>
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>

@@ -1,0 +1,409 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/layout/Footer.astro";
+import { LINKS } from "../data/site";
+import deliveryRider from "../assets/images/delivery_rider.png";
+import newOrder from "../assets/images/new-order.avif";
+import resto from "../assets/images/resto.avif";
+
+const benefits = [
+  {
+    icon: "fa6-solid:clock",
+    title: "Liberté totale",
+    desc: "Soyez votre propre patron. Choisissez vos horaires, vos zones de livraison et roulez quand vous le souhaitez. Pas de contrainte de temps.",
+  },
+  {
+    icon: "fa6-solid:money-bill-trend-up",
+    title: "Revenus élevés",
+    desc: "Gagnez des revenus compétitifs basés sur vos efforts. Des bonus de performance et des paiements hebdomadaires garantis.",
+  },
+  {
+    icon: "fa6-solid:heart-pulse",
+    title: "Plus d’opportunités",
+    desc: "Accédez à de nombreuses commandes dans la ville.",
+  },
+];
+
+const requirements = [
+  {
+    icon: "fa6-solid:id-card",
+    title: "Identité",
+    desc: "Une pièce d'identité valide (carte d'électeur, passeport ou permis) est requise. Vous devez avoir au moins 18 ans.",
+    hover: "group-hover:rotate-6",
+  },
+  {
+    icon: "fa6-solid:mobile-screen",
+    title: "Smartphone",
+    desc: "Un téléphone (Android ou iOS) avec une connexion internet active pour recevoir les commandes en temps réel.",
+    hover: "group-hover:-rotate-6",
+  },
+  {
+    icon: "fa6-solid:motorcycle",
+    title: "Transport",
+    desc: "Vous devez posséder une Moto ou un Scooter en bon état de fonctionnement pour assurer des livraisons rapides.",
+    hover: "group-hover:scale-110",
+  },
+];
+
+const faqs = [
+  {
+    question: "Quelles sont les conditions pour devenir livreur ?",
+    answer:
+      "Pour rejoindre Nafuu, vous devez avoir au moins 18 ans, posséder un smartphone (Android ou iOS) et disposer d'un moyen de transport (vélo, moto ou scooter) en bon état. Une pièce d'identité valide est également requise pour la vérification de votre compte.",
+  },
+  {
+    question: "Comment et quand suis-je payé ?",
+    answer:
+      "Vos revenus sont calculés par course et incluent des bonus de distance et de temps. Les paiements sont effectués chaque semaine, directement sur votre compte bancaire ou via Mobile Money (M-Pesa, Orange Money, Airtel Money). Vous avez un accès complet à l'historique de vos gains dans l'application.",
+  },
+  {
+    question: "Combien de temps prend le processus d'inscription ?",
+    answer:
+      "L'inscription initiale ne prend que 5 minutes. Une fois votre dossier complet soumis, notre équipe effectue une vérification sous 48 heures. Dès validation, vous recevrez une invitation pour une courte session d'information en ligne ou en présentiel avant de pouvoir effectuer votre première livraison.",
+  },
+  {
+    question: "Puis-je choisir mes propres horaires ?",
+    answer:
+      "Absolument ! C'est l'un des plus grands avantages de Nafuu. Vous êtes totalement libre de choisir quand vous travaillez. Il n'y a pas d'heures minimums obligatoires. Vous vous connectez quand vous voulez, et vous vous déconnectez quand vous avez terminé.",
+  },
+  {
+    question: "Que se passe-t-il si j'ai un problème pendant une livraison ?",
+    answer:
+      "Notre équipe de support dédiée aux partenaires est disponible 24h/24 et 7j/7 directement via le chat de l'application. Que ce soit pour un problème d'itinéraire, une difficulté au restaurant ou une question avec un client, nous sommes là pour vous aider en temps réel.",
+  },
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
+  })),
+};
+
+// Phone frames light up orange as the reader scrolls through "Comment ça marche" (see script below).
+const phoneFrame =
+  "w-[220px] mx-auto bg-slate-800 rounded-[3rem] p-3 shadow-2xl border-4 aspect-[9/18.5] relative overflow-hidden transition-all duration-700 border-slate-700 data-[active=true]:border-orange-500";
+---
+
+<BaseLayout
+  title="Devenir livreur Nafuu à Bunia | Gagnez de l'argent en livrant"
+  description="Devenez livreur partenaire Nafuu à Bunia : horaires libres, paiements hebdomadaires par Mobile Money et support dédié. Inscription en 5 minutes."
+  jsonLd={[faqJsonLd]}
+  bodyClass="bg-white text-slate-900"
+>
+  <div class="min-h-screen flex flex-col">
+    <div class="grow bg-white">
+      <!-- Rider navbar -->
+      <nav
+        data-scroll-state
+        class="fixed top-4 left-4 right-4 z-50 flex items-center px-4 sm:px-6 md:px-12 transition-all duration-500 rounded-2xl bg-transparent py-6 md:py-8 data-[scrolled=true]:bg-white/80 data-[scrolled=true]:backdrop-blur-lg data-[scrolled=true]:shadow-lg data-[scrolled=true]:border data-[scrolled=true]:border-slate-200/50 data-[scrolled=true]:py-3"
+        aria-label="Navigation livreurs"
+      >
+        <div class="flex-1 flex justify-start">
+          <a href="/" class="flex items-center group" aria-label="Nafuu, accueil">
+            <img src="/images/logo_nafuu_black.png" alt="Nafuu Logo" width="813" height="378" class="h-6 w-auto group-hover:scale-105 transition-transform" />
+            <span class="text-orange-600 font-medium text-lg ml-3 transition-colors duration-500">Livreurs</span>
+          </a>
+        </div>
+        <div class="flex-1 flex justify-end">
+          <a href={LINKS.riderSignup} class="px-6 py-3 rounded-md font-bold shadow-lg transition-all active:scale-95 bg-orange-600 text-white hover:bg-orange-700 text-sm">
+            Devenir Livreur
+          </a>
+        </div>
+      </nav>
+
+      <main>
+        <!-- Hero -->
+        <section class="relative min-h-[90vh] flex items-center pt-32 overflow-hidden" data-reveal-group>
+          <div class="absolute top-0 right-0 w-1/3 h-full bg-orange-50 -z-10 rounded-bl-[200px] hidden lg:block"></div>
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+            <div data-reveal="up">
+              <h1 class="text-5xl md:text-7xl font-black text-slate-900 leading-[0.95] mb-8">
+                Livrez des repas.<br /> Gagnez de l’argent.
+              </h1>
+              <p class="text-[16px] text-slate-600 mb-10 leading-relaxed max-w-xl">
+                Devenez livreur et gagnez de vrais revenus chaque jour. Inscrivez-vous facilement et commencez à livrer rapidement avec un support dédié.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4">
+                <a href={LINKS.riderSignup} class="bg-orange-600 text-white px-8 py-4 rounded-md text-sm font-black shadow-xl hover:bg-orange-700 hover:scale-105 transition-all text-center">
+                  Devenir Livreur
+                </a>
+              </div>
+            </div>
+            <div class="relative delay-300" data-reveal="zoom">
+              <div class="relative z-10 rounded-[40px] overflow-hidden shadow-2xl border-[12px] border-white -rotate-3 group hover:rotate-0 transition-transform duration-700">
+                <Image
+                  src={deliveryRider}
+                  alt="Livreur Nafuu en action"
+                  width={1200}
+                  widths={[600, 1200]}
+                  sizes="(min-width: 1024px) 600px, 100vw"
+                  loading="eager"
+                  fetchpriority="high"
+                  class="w-full h-full object-cover aspect-[4/5]"
+                />
+              </div>
+              <div class="absolute -bottom-10 -right-2 sm:-right-10 bg-white p-6 rounded-md shadow-2xl border border-slate-100 z-20 animate-bounce">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 bg-orange-100 rounded-md flex items-center justify-center text-orange-600">
+                    <Icon name="fa6-solid:hand-holding-dollar" />
+                  </div>
+                  <div>
+                    <p class="text-xs text-slate-500 font-bold uppercase tracking-tighter">Revenus</p>
+                    <p class="text-lg font-black text-slate-900">Paiement Hebdo</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Benefits -->
+        <section class="py-32 bg-slate-50 relative overflow-hidden">
+          <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-20">
+              <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-6">Pourquoi choisir de rouler avec Nafuu ?</h2>
+              <div class="w-24 h-1.5 bg-orange-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+              {
+                benefits.map((benefit) => (
+                  <div class="group bg-white p-12 rounded-[48px] border border-slate-200 shadow-sm hover:shadow-2xl hover:border-orange-500/30 transition-all duration-500 hover:-translate-y-2 flex flex-col items-center text-center">
+                    <div class="w-20 h-20 bg-slate-900 rounded-3xl flex items-center justify-center text-white text-3xl mb-10 group-hover:bg-orange-600 group-hover:rotate-12 group-hover:scale-110 transition-all duration-500 shadow-xl shadow-slate-900/10 group-hover:shadow-orange-600/20">
+                      <Icon name={benefit.icon} />
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900 mb-6 uppercase tracking-tight group-hover:text-orange-600 transition-colors">{benefit.title}</h3>
+                    <p class="text-slate-500 leading-relaxed font-medium">{benefit.desc}</p>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+
+        <!-- How it works -->
+        <section id="how-it-works" class="py-32 bg-slate-900 text-white relative overflow-hidden">
+          <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-20 text-center">
+              <h2 class="text-5xl md:text-6xl font-black mb-6">Comment ça marche</h2>
+              <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+                Une fois que vous avez rejoint Nafuu, voici le processus fluide de chaque livraison.
+              </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-20 items-start">
+              <!-- Step 1 -->
+              <div class="space-y-10 flex flex-col items-center text-center" data-reveal="up">
+                <div class="relative group">
+                  <div class={phoneFrame} data-step-threshold="15">
+                    <div class="bg-[#f0f0f0] w-full h-full rounded-[2.2rem] overflow-hidden relative">
+                      <div class="absolute inset-0">
+                        <Image src={newOrder} alt="" width={440} class="w-full h-full object-cover" />
+                      </div>
+                      <div class="absolute bottom-6 left-4 right-4 bg-white p-4 rounded-md shadow-lg">
+                        <div class="flex items-center gap-3 mb-3">
+                          <div class="w-8 h-8 bg-orange-100 rounded-md flex items-center justify-center">
+                            <Icon name="fa6-solid:utensils" class="text-orange-600 text-xs" />
+                          </div>
+                          <div class="text-left">
+                            <p class="text-[10px] font-bold text-slate-900">Nouvelle commande</p>
+                            <p class="text-[8px] text-slate-500">Restaurant Nafuu</p>
+                          </div>
+                        </div>
+                        <div class="w-full h-8 bg-teal-500 rounded-md flex items-center justify-center">
+                          <Icon name="fa6-solid:check" class="text-white text-xs" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="max-w-xs space-y-4">
+                  <div class="w-12 h-12 rounded-xl bg-orange-600 text-white flex items-center justify-center font-black text-xl mx-auto shadow-lg">1</div>
+                  <h3 class="text-2xl font-black">Acceptez et c'est parti</h3>
+                  <p class="text-slate-400 leading-relaxed">
+                    Dès que vous êtes en ligne, nous vous proposons des commandes. Un simple clic pour accepter et lancer la mission.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="space-y-10 flex flex-col items-center text-center" data-reveal="up">
+                <div class="relative group">
+                  <div class={phoneFrame} data-step-threshold="50">
+                    <div class="bg-[#f0f0f0] w-full h-full rounded-[2.2rem] overflow-hidden relative">
+                      <div class="absolute inset-0">
+                        <Image src={resto} alt="" width={440} class="w-full h-full object-cover" />
+                      </div>
+                      <div class="absolute bottom-6 left-4 right-4 bg-white p-4 rounded-md shadow-lg">
+                        <p class="text-[10px] font-bold text-slate-900 mb-1 text-left">Point de retrait</p>
+                        <p class="text-[8px] text-slate-500 mb-3 text-left">Récupération en cours...</p>
+                        <div class="w-full h-8 bg-teal-500 rounded-md flex items-center justify-center">
+                          <Icon name="fa6-solid:check" class="text-white text-xs" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="max-w-xs space-y-4">
+                  <div class="w-12 h-12 rounded-xl bg-orange-600 text-white flex items-center justify-center font-black text-xl mx-auto shadow-lg">2</div>
+                  <h3 class="text-2xl font-black">Récupérez la commande</h3>
+                  <p class="text-slate-400 leading-relaxed">
+                    Suivez l'itinéraire vers le restaurant. Présentez votre écran au personnel pour recevoir le colis prêt à être livré.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="space-y-10 flex flex-col items-center text-center" data-reveal="up">
+                <div class="relative group">
+                  <div class={phoneFrame} data-step-threshold="85">
+                    <div class="bg-white w-full h-full rounded-[2.2rem] overflow-hidden relative p-6">
+                      <div class="flex items-center justify-between mb-8">
+                        <Icon name="fa6-solid:bars" class="text-slate-300 text-xs" />
+                        <span class="text-[10px] font-bold text-slate-700">Livraison confirmee</span>
+                        <Icon name="fa6-solid:check" class="text-teal-500 text-xs" />
+                      </div>
+                      <div class="space-y-4">
+                        <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto text-green-600 text-2xl">
+                          <Icon name="fa6-solid:face-smile" />
+                        </div>
+                        <p class="text-[10px] font-black text-slate-900 uppercase">Livraison Terminée</p>
+                        <p class="text-[14px] font-bold text-orange-600">Livraison finalisee</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="max-w-xs space-y-4">
+                  <div class="w-12 h-12 rounded-xl bg-orange-600 text-white flex items-center justify-center font-black text-xl mx-auto shadow-lg">3</div>
+                  <h3 class="text-2xl font-black">Livrez et souriez</h3>
+                  <p class="text-slate-400 leading-relaxed">
+                    L'application vous guide vers le client. Validez la livraison et votre gain s'ajoute immédiatement à votre portefeuille.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Requirements -->
+        <section class="py-32 bg-slate-50">
+          <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+              <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-6">Conditions d'adhésion</h2>
+              <p class="text-slate-600 text-xl max-w-2xl mx-auto">Rejoindre la flotte est simple. Voici ce que nous demandons.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              {
+                requirements.map((req) => (
+                  <div class="bg-white p-12 rounded-[50px] border border-slate-200 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-2 group text-center flex flex-col items-center">
+                    <div class={`w-20 h-20 bg-orange-600 rounded-3xl flex items-center justify-center text-white text-3xl mb-10 shadow-lg transition-transform ${req.hover}`}>
+                      <Icon name={req.icon} />
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900 mb-6 uppercase tracking-tight">{req.title}</h3>
+                    <p class="text-slate-600 leading-relaxed font-medium">{req.desc}</p>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq-section" class="py-32 bg-white scroll-mt-24">
+          <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-20">
+              <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-6">Questions fréquentes</h2>
+              <p class="text-slate-600 text-[16px]">Tout ce que vous devez savoir pour démarrer sereinement.</p>
+            </div>
+            <div class="bg-slate-50 rounded-[40px] p-8 md:p-12 shadow-sm border border-slate-100">
+              {
+                faqs.map((faq) => (
+                  <details class="faq group border-b border-slate-200 last:border-0">
+                    <summary class="w-full py-7 flex items-center justify-between gap-4 text-left cursor-pointer list-none outline-none focus-visible:text-orange-600 [&::-webkit-details-marker]:hidden">
+                      <span class="text-xl font-bold transition-all duration-300 text-slate-900 group-hover:text-orange-500 group-open:text-orange-600 group-open:translate-x-1">
+                        {faq.question}
+                      </span>
+                      <span class="shrink-0 w-10 h-10 rounded-md border-2 border-slate-200 flex items-center justify-center transition-all duration-500 text-slate-400 group-hover:border-orange-200 group-hover:text-orange-400 group-open:bg-orange-600 group-open:border-orange-600 group-open:text-white group-open:rotate-180 group-open:shadow-lg">
+                        <Icon name="fa6-solid:chevron-down" class="text-xs" />
+                      </span>
+                    </summary>
+                    <div class="faq-answer">
+                      <p class="text-slate-600 leading-relaxed text-lg pb-8">{faq.answer}</p>
+                    </div>
+                  </details>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="py-24 bg-orange-600 relative overflow-hidden">
+          <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-96 h-96 border-[40px] border-white rounded-md -translate-x-1/2 -translate-y-1/2"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 border-[40px] border-white rounded-md translate-x-1/2 translate-y-1/2"></div>
+          </div>
+          <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl md:text-6xl font-black text-white mb-10 leading-tight">
+              N'attendez plus, <br /> commencez à gagner dès aujourd'hui
+            </h2>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <a href={LINKS.riderSignup} class="w-full sm:w-auto bg-white text-orange-600 px-12 py-5 rounded-md text-xl font-black shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:bg-orange-50 hover:scale-105 active:scale-95 transition-all">
+                Postuler en 5 minutes
+              </a>
+              <a href="#faq-section" class="w-full sm:w-auto bg-orange-700 text-white px-12 py-5 rounded-md text-xl font-black hover:bg-orange-800 transition-all">
+                Consulter la FAQ
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <Footer />
+  </div>
+</BaseLayout>
+
+<style>
+  /* Animate the FAQ answer open/closed where the browser supports it. */
+  .faq::details-content {
+    block-size: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: block-size 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s, content-visibility 0.5s allow-discrete;
+  }
+  .faq[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+  @supports (interpolate-size: allow-keywords) {
+    .faq {
+      interpolate-size: allow-keywords;
+    }
+  }
+</style>
+
+<script>
+  // Highlight each phone frame once the "How it works" section has been scrolled far enough.
+  const section = document.getElementById("how-it-works");
+  const frames = document.querySelectorAll<HTMLElement>("[data-step-threshold]");
+  if (section && frames.length) {
+    const update = () => {
+      const rect = section.getBoundingClientRect();
+      const start = window.innerHeight * 0.8;
+      const end = -rect.height * 0.2;
+      const progress = Math.min(Math.max(((start - rect.top) / (start - end)) * 100, 0), 100);
+      frames.forEach((frame) => {
+        frame.dataset.active = String(progress > Number(frame.dataset.stepThreshold));
+      });
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+  }
+</script>

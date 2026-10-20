@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+/* Inter, self-hosted (variable font via @fontsource-variable/inter). */
+@theme {
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+/* In the components layer so Tailwind utilities (e.g. `hidden`, `delay-300`) still win. */
+@layer components {
+  /* Icons rendered by astro-icon size with the surrounding font, like the old Font Awesome <i>. */
+  [data-icon] {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, #ff6b00 0%, #ff8f00 100%);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Scroll-reveal: elements start hidden and get .is-visible from src/scripts/ui.ts.
+     Without JS (no .js class on <html>) they are shown immediately. */
+  .js [data-reveal]:not(.is-visible) {
+    opacity: 0;
+  }
+  .js [data-reveal="up"]:not(.is-visible) {
+    transform: translateY(2.5rem);
+  }
+  .js [data-reveal="up-lg"]:not(.is-visible) {
+    transform: translateY(5rem);
+  }
+  .js [data-reveal="left"]:not(.is-visible) {
+    transform: translateX(-3rem);
+  }
+  .js [data-reveal="right"]:not(.is-visible) {
+    transform: translateX(3rem);
+  }
+  .js [data-reveal="zoom"]:not(.is-visible) {
+    transform: scale(0.95);
+  }
+  [data-reveal] {
+    transition-property: opacity, transform, translate, scale, rotate, box-shadow, border-color;
+    transition-duration: 1000ms;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .js [data-reveal]:not(.is-visible) {
+    opacity: 1;
+    transform: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

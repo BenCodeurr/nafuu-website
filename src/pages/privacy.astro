@@ -1,0 +1,90 @@
+---
+import LegalLayout from "../layouts/LegalLayout.astro";
+
+// Same behaviour as the original page: shows the date the site was built.
+const currentDate = new Date().toLocaleDateString("fr-FR", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<LegalLayout
+  title="Politique de confidentialité | Nafuu"
+  description="Comment Nafuu collecte, utilise et protège vos données personnelles : informations de compte, géolocalisation pour la livraison, commandes et vos droits."
+>
+  <h1 class="text-5xl sm:text-6xl md:text-8xl font-black hyphens-auto text-slate-900 mb-12 leading-[0.9] tracking-tighter">
+    Politique de <br />
+    <span class="text-orange-600">confidentialité</span>
+  </h1>
+
+  <div class="space-y-12 text-slate-700 leading-relaxed text-lg">
+    <p class="text-xl text-slate-900">
+      Ici nous prenons la protection de vos données personnelles
+      très au sérieux. Cette politique détaille comment nous collectons,
+      utilisons et protégeons vos informations.
+    </p>
+
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        1. Données collectées
+      </h2>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>Informations de compte (nom, email, numéro de téléphone).</li>
+        <li>Données de géolocalisation pour assurer la livraison.</li>
+        <li>Historique de vos commandes et préférences alimentaires.</li>
+        <li>
+          Informations relatives aux transactions (via nos prestataires de
+          paiement sécurisés).
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        2. Utilisation des données
+      </h2>
+      <p>Vos données sont principalement utilisées pour :</p>
+      <ul class="list-disc pl-6 space-y-2 mt-4">
+        <li>Traiter et livrer vos commandes.</li>
+        <li>
+          Vous envoyer des notifications sur le statut de votre livraison.
+        </li>
+        <li>
+          Améliorer nos services et personnaliser votre expérience
+          utilisateur.
+        </li>
+        <li>Assurer la sécurité de notre plateforme contre la fraude.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        3. Partage des informations
+      </h2>
+      <p>
+        Nafuu ne vend jamais vos données personnelles. Nous partageons
+        uniquement les informations nécessaires avec nos partenaires
+        (restaurants et livreurs) pour la bonne exécution de votre
+        commande.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        4. Vos droits
+      </h2>
+      <p>
+        Conformément aux réglementations en vigueur, vous disposez d'un
+        droit d'accès, de rectification et de suppression de vos données
+        personnelles. Vous pouvez exercer ces droits directement depuis
+        les paramètres de votre compte dans l'application ou en nous
+        contactant.
+      </p>
+    </section>
+
+    <section class="pt-10 border-t border-slate-100 italic text-slate-500 text-sm">
+      Dernière mise à jour : {currentDate}
+    </section>
+  </div>
+</LegalLayout>

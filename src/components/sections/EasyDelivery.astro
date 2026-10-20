@@ -1,0 +1,63 @@
+---
+import { Icon } from "astro-icon/components";
+import DeliveryTracker from "./DeliveryTracker";
+
+const wallets = ["M-Pesa", "Orange", "Airtel"];
+---
+
+<section class="py-24 bg-white overflow-hidden" data-reveal-group>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 space-y-6 md:space-y-0">
+      <div class="max-w-3xl">
+        <h2 class="text-6xl lg:text-8xl font-black text-slate-900 mb-6 leading-[0.9] tracking-tighter" data-reveal="up">
+          Comment nous facilitons <br class="hidden md:block" /> <span class="text-orange-500">la livraison</span>
+        </h2>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-10 lg:gap-16">
+      <!-- Payment card -->
+      <div class="group relative bg-slate-50 rounded-[40px] p-10 border border-slate-100 delay-300 hover:shadow-xl hover:border-orange-200" data-reveal="left">
+        <div class="w-20 h-20 bg-orange-100 rounded-md flex items-center justify-center mb-8 text-orange-600 text-4xl group-hover:scale-110 transition-transform duration-500">
+          <Icon name="fa6-solid:credit-card" />
+        </div>
+        <h3 class="text-3xl font-black text-slate-900 mb-4">Le paiement simplifié</h3>
+        <p class="text-[16px] text-slate-600 leading-relaxed">
+          Pas d'espèces ? Pas de problème. Payez en toute sécurité par <span class="font-bold">Mobile Money</span> ou par <span class="font-bold">Carte Bancaire</span> directement depuis l'application.
+        </p>
+        <div class="mt-8 flex gap-4">
+          {
+            wallets.map((wallet, i) => (
+              <div
+                class="bg-white px-5 py-3 rounded-md border border-slate-200 shadow-sm flex items-center text-xs font-bold text-slate-500 hover:text-orange-600 hover:border-orange-500 transition-all cursor-default hover:-translate-y-2 hover:animate-bounce [animation-duration:1s]"
+                style={`animation-delay: ${i * 0.1}s`}
+              >
+                {wallet}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Tracking card -->
+      <div class="group relative bg-slate-900 rounded-[40px] p-10 border border-slate-800 delay-500 hover:shadow-xl flex flex-col" data-reveal="right">
+        <div class="w-20 h-20 bg-orange-600 rounded-md flex items-center justify-center mb-8 text-white text-4xl group-hover:scale-110 transition-transform duration-500">
+          <Icon name="fa6-solid:location-dot" />
+        </div>
+        <h3 class="text-3xl font-black text-white mb-4">Suivez votre commande</h3>
+        <p class="text-[16px] text-slate-400 leading-relaxed mb-8">
+          Suivez la livraison de vos repas du début à la fin. Soyez notifié quand votre livreur est en route et suivez sa progression en temps réel sur la carte.
+        </p>
+
+        <DeliveryTracker client:visible />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+</style>

@@ -1,0 +1,333 @@
+---
+import LegalLayout from "../layouts/LegalLayout.astro";
+
+// Same behaviour as the original page: shows the date the site was built.
+const currentDate = new Date().toLocaleDateString("fr-FR", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<LegalLayout
+  title="Conditions d'utilisation | Nafuu"
+  description="Conditions générales d'utilisation de Nafuu, la plateforme de livraison de repas éditée par GSWORLD à Bunia (RDC) : commandes, paiements, livraisons et responsabilités."
+>
+  <h1 class="text-5xl sm:text-6xl md:text-8xl font-black hyphens-auto text-slate-900 mb-12 leading-[0.9] tracking-tighter">
+    Conditions <br />
+    <span class="text-orange-600">d'utilisation</span>
+  </h1>
+  <p class="text-slate-700 leading-relaxed text-md mb-12">
+    <i>
+      En utilisant l'application Nafuu, vous acceptez les présentes
+      Conditions Générales d'Utilisation (CGU). Si vous n'êtes pas
+      d'accord, veuillez ne pas utiliser le service. Pour toute question,
+      contactez-nous à : 
+      <a
+        href="mailto:legal@nafuudelivery.com"
+        class="text-orange-600 font-bold"
+      >
+        legal@nafuudelivery.com
+      </a>
+    </i>
+  </p>
+
+  <div class="space-y-12 text-slate-700 leading-relaxed text-md">
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        1. Qui sommes-nous ?
+      </h2>
+      <p>
+        Nafuu est une plateforme numérique éditée par GSWORLD, société
+        enregistrée en République Démocratique du Congo. Nafuu met en
+        relation des utilisateurs, des restaurants partenaires
+        indépendants et des livreurs. Nafuu ne prépare pas les repas et
+        n'est pas un restaurant.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        2. Acceptation des CGU
+      </h2>
+      <p>
+        L'utilisation de l'application Nafuu vaut acceptation pleine et
+        entière des présentes CGU. Ces CGU peuvent être modifiées à tout
+        moment. L'utilisateur sera informé de toute modification par
+        notification via un moyen de communication fourni lors de
+        l'inscription. La poursuite de l'utilisation du service après
+        modification vaut acceptation des nouvelles CGU.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        3. Création de compte
+      </h2>
+      <p class="mb-4">
+        Pour passer commande, l'utilisateur doit créer un compte en
+        fournissant des informations exactes, complètes et à jour : nom,
+        numéro de téléphone et adresse de livraison, etc.
+      </p>
+      <p class="mb-4">
+        L'utilisateur est seul responsable de la confidentialité de ses
+        identifiants de connexion. Toute commande passée depuis son compte
+        est réputée avoir été effectuée par lui.
+      </p>
+      <p class="mb-4">
+        En cas de perte, de vol ou d'utilisation non autorisée de son
+        compte, l'utilisateur doit nous contacter immédiatement à : 
+        <a
+          href="mailto:support@nafuu.cd"
+          class="text-orange-600 font-bold"
+        >
+          support@nafuu.cd
+        </a>
+      </p>
+      <p>
+        Nafuu se réserve le droit de suspendre ou supprimer tout compte en
+        cas d'informations fausses, de comportement abusif ou de violation
+        des présentes CGU, sans préavis ni indemnité.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        4. Accès au service
+      </h2>
+      <p>
+        L'accès à Nafuu nécessite une connexion internet. Les frais de
+        connexion, d'équipement et de données mobiles sont à la charge
+        exclusive de l'utilisateur.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        5. Commandes
+      </h2>
+      <h3 class="text-xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        5.1. Passation de commande
+      </h3>
+      <p class="mb-4">
+        En validant une commande, l'utilisateur confirme avoir pris
+        connaissance du contenu, des prix et des délais estimés affichés.
+        La commande est définitive dès validation du paiement.
+      </p>
+      <h3 class="text-xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        5.2. Annulation
+      </h3>
+      <p class="mb-4">
+        Une commande peut être annulée uniquement dans les 5 minutes
+        suivant sa validation, tant qu'elle n'a pas encore été acceptée
+        par le restaurant. Passé ce délai, l'annulation n'est plus
+        possible.
+      </p>
+      <h3 class="text-xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        5.3. Contenu de la commande
+      </h3>
+      <p>
+        Les descriptions et photos des plats sont fournies par les
+        restaurants partenaires. Nafuu ne garantit pas leur exactitude. En
+        cas d'allergie ou de régime alimentaire particulier, l'utilisateur
+        est invité à contacter directement le restaurant avant de
+        commander.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        6. Prix et Paiement
+      </h2>
+      <h3 class="text-xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        6.1. Prix
+      </h3>
+      <p class="mb-4">
+        Les prix affichés sont en francs congolais (CDF) ou en dollars
+        américains (USD) selon le restaurant. Ils incluent les taxes
+        applicables. Des frais de livraison s'ajouteront et sont indiqués
+        clairement avant la validation de la commande.
+      </p>
+      <p class="mb-4">
+        Nafuu se réserve le droit de modifier les prix à tout moment. Le
+        prix applicable est celui affiché au moment de la validation de la
+        commande.
+      </p>
+      <h3 class="text-xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        6.2. Moyens de paiement
+      </h3>
+      <p class="mb-4">
+        Le paiement s'effectue via :
+        <ul class="list-disc list-inside">
+          <li>Mobile Money (M-Pesa, Orange Money, Airtel Money)</li>
+          <li>Carte bancaire</li>
+          <li>Paiement en espèces à la livraison</li>
+        </ul>
+      </p>
+      <p class="mb-4">
+        En cas de paiement en espèces, l'utilisateur s'engage à avoir le montant exact disponible au moment de la livraison.
+      </p>
+
+
+      <h3 class="text-xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        6.3. Échec de paiement
+      </h3>
+      <p class="mb-4">
+        En cas d'échec du paiement électronique, la commande est automatiquement annulée. Nafuu n'est pas responsable des frais prélevés par les opérateurs de Mobile Money ou les établissements bancaires.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        7. Livraison
+      </h2>
+      <h3 class="text-xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        7.1 Délais
+      </h3>
+      <p class="mb-4">
+        Les délais de livraison affichés sont des estimations. Ils peuvent varier en raison du trafic, des conditions météorologiques, du volume de commandes ou de toute autre circonstance indépendante de la volonté de Nafuu.
+      </p>
+      <p class="mb-4">
+        Un retard de livraison ne constitue pas un motif de remboursement automatique.
+      </p>
+      <h3 class="text-xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        7.2 Adresse de livraison
+      </h3>
+      <p class="mb-4">
+        L'utilisateur est responsable de l'exactitude de l'adresse de livraison renseignée. En cas d'adresse incorrecte ou incomplète, Nafuu ne peut être tenue responsable de la non-livraison. Des frais supplémentaires peuvent s'appliquer en cas de modification d'adresse après validation.
+      </p>
+      <h3 class="text-xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        7.3 Réception de la commande
+      </h3>
+      <p>
+        L'utilisateur doit être disponible et joignable au moment de la livraison. En cas d'absence, le livreur tentera de le contacter. Passé <strong>10 minutes d'attente</strong>, la commande est considérée comme livrée et aucun remboursement ne sera accordé.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        8. Remboursements et réclamations
+      </h2>
+      <h3 class="text-xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        8.1 Conditions de remboursement
+      </h3>
+      <p class="mb-4">
+        Un remboursement ou un avoir peut être accordé dans les cas suivants :
+        <ul class="list-disc list-inside mt-2">
+          <li>Commande non livrée par la faute de Nafuu ou du livreur</li>
+          <li>Plat manquant dans la commande, confirmé après vérification</li>
+          <li>Erreur manifeste de commande imputable au restaurant</li>
+        </ul>
+      </p>
+      <h3 class="text-xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        8.2 Exclusions
+      </h3>
+      <p class="mb-4">
+        Aucun remboursement ne sera accordé pour :
+        <ul class="list-disc list-inside mt-2">
+          <li>Un retard de livraison dû au trafic, à la météo ou à la force majeure</li>
+          <li>Une insatisfaction sur la qualité ou le goût des plats</li>
+          <li>Une adresse de livraison incorrecte fournie par l'utilisateur</li>
+          <li>Une commande annulée hors délai</li>
+        </ul>
+      </p>
+      <h3 class="text-xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        8.3 Procédure
+      </h3>
+      <p>
+        Toute réclamation doit être soumise dans les <strong>24 heures suivant la livraison</strong> via l'application ou par email à <a href="mailto:support@nafuu.cd" class="text-orange-600 font-bold">support@nafuu.cd</a>. Au-delà de ce délai, aucune réclamation ne sera traitée.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        9. Responsabilité de Nafuu
+      </h2>
+      <p class="mb-4">
+        Nafuu est une plateforme d'intermédiation. Elle n'est pas partie au contrat entre l'utilisateur et le restaurant partenaire.
+      </p>
+      <p class="mb-4">
+        Nafuu ne saurait être tenue responsable de :
+        <ul class="list-disc list-inside mt-2">
+          <li>La qualité, la fraîcheur ou la conformité des plats préparés par les restaurants</li>
+          <li>Les dommages directs ou indirects liés à la consommation des repas</li>
+          <li>Les retards ou échecs de livraison liés à des causes extérieures</li>
+          <li>L'indisponibilité temporaire de l'application</li>
+        </ul>
+      </p>
+      <p>
+        La responsabilité de Nafuu, lorsqu'elle est engagée, est strictement limitée au montant de la commande concernée.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        10. Responsabilité des restaurants partenaires
+      </h2>
+      <p>
+        Les restaurants partenaires sont des entités indépendantes. Ils sont seuls responsables de la préparation, de la qualité, de l'hygiène et de la conformité des repas qu'ils proposent. Nafuu ne contrôle pas leurs pratiques et ne peut être tenue responsable de leurs manquements.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        11. Comportement de l'utilisateur
+      </h2>
+      <p class="mb-4">
+        L'utilisateur s'engage à utiliser l'application de bonne foi et à ne pas :
+        <ul class="list-disc list-inside mt-2">
+          <li>Fournir de fausses informations</li>
+          <li>Passer des commandes frauduleuses ou sans intention de paiement</li>
+          <li>Harceler ou menacer les livreurs ou le service client</li>
+          <li>Tenter de contourner les systèmes de paiement de la plateforme</li>
+        </ul>
+      </p>
+      <p>
+        Tout manquement à ces obligations peut entraîner la suspension immédiate du compte, sans remboursement des commandes en cours.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        12. Propriété intellectuelle
+      </h2>
+      <p>
+        L'ensemble des contenus de l'application Nafuu — logo, textes, graphiques, interfaces, code — est la propriété exclusive de GSWORLD. Toute reproduction, représentation ou exploitation sans autorisation écrite préalable est strictement interdite et peut faire l'objet de poursuites.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        13. Droit applicable et litiges
+      </h2>
+      <p class="mb-4">
+        Les présentes CGU sont régies par le droit de la <strong>République Démocratique du Congo</strong>.
+      </p>
+      <p class="mb-4">
+        En cas de litige, l'utilisateur est invité à contacter Nafuu en priorité pour une résolution à l'amiable via : <a href="mailto:legal@nafuudelivery.com" class="text-orange-600 font-bold">legal@nafuudelivery.com</a>
+      </p>
+      <p>
+        À défaut de résolution amiable dans un délai de <strong>30 jours</strong>, le litige sera soumis aux juridictions compétentes de <strong>Bunia, Ituri, RDC</strong>.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+        14. Contact
+      </h2>
+      <p>
+        <strong>GSWORLD — Nafuu</strong><br />
+        Email : <a href="mailto:support@nafuudelivery.com" class="text-orange-600 font-bold">support@nafuudelivery.com</a><br />
+        Application mobile : Nafuu (disponible sur Android et iOS)
+      </p>
+    </section>
+
+    <p class="italic text-center text-slate-500 my-10">
+      Ces CGU ont été rédigées pour être comprises, pas seulement signées.
+    </p>
+
+    <section class="pt-10 border-t border-slate-100 italic text-slate-500 text-sm">
+      Dernière mise à jour : {currentDate}
+    </section>
+  </div>
+</LegalLayout>

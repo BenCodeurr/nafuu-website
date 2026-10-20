@@ -1,0 +1,36 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "astro",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/dashboard", "destination": "https://app.nafuudelivery.com/dashboard", "statusCode": 301 },
+    { "source": "/dashboard/:path*", "destination": "https://app.nafuudelivery.com/dashboard/:path*", "statusCode": 301 },
+    { "source": "/restaurant-onboarding", "destination": "https://app.nafuudelivery.com/restaurant-onboarding", "statusCode": 301 },
+    { "source": "/rider-onboarding", "destination": "https://app.nafuudelivery.com/rider-onboarding", "statusCode": 301 },
+    { "source": "/restaurant-selection", "destination": "https://app.nafuudelivery.com/restaurant-selection", "statusCode": 301 },
+    { "source": "/delete-account", "destination": "https://app.nafuudelivery.com/delete-account", "statusCode": 301 },
+    { "source": "/admin", "destination": "https://admin.nafuudelivery.com/", "statusCode": 301 },
+    { "source": "/admin/:path*", "destination": "https://admin.nafuudelivery.com/", "statusCode": 301 },
+    { "source": "/oauth/authorize", "destination": "https://admin.nafuudelivery.com/oauth/authorize", "statusCode": 301 }
+  ],
+  "headers": [
+    {
+      "source": "/sw.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
+        { "key": "Service-Worker-Allowed", "value": "/" }
+      ]
+    },
+    {
+      "source": "/registerSW.js",
+      "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+    },
+    {
+      "source": "/_astro/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
+  ]
+}

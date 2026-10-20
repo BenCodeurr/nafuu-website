@@ -1,0 +1,31 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<a
+  href="#"
+  id="scroll-top"
+  aria-label="Retourner en haut"
+  class="fixed bottom-8 right-8 z-60 w-14 h-14 gradient-primary text-white rounded-md shadow-2xl flex items-center justify-center transition-all duration-500 transform hover:scale-110 active:scale-90 hover:rotate-6 opacity-0 translate-y-10 pointer-events-none"
+>
+  <Icon name="fa6-solid:arrow-up" class="text-xl" />
+</a>
+
+<script>
+  const button = document.getElementById("scroll-top");
+  if (button) {
+    const hidden = ["opacity-0", "translate-y-10", "pointer-events-none"];
+    const shown = ["opacity-100", "translate-y-0", "pointer-events-auto"];
+    const update = () => {
+      const visible = window.scrollY > 400;
+      button.classList.remove(...(visible ? hidden : shown));
+      button.classList.add(...(visible ? shown : hidden));
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+</script>

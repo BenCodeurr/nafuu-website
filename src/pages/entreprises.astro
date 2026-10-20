@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ComingSoon from "../components/ui/ComingSoon.astro";
+---
+
+<BaseLayout
+  title="Nafuu Entreprises | Repas d'équipe livrés à Bunia (bientôt)"
+  description="Nafuu Entreprises : la solution de repas d'équipe et de livraison B2B pour les entreprises et organisations de Bunia. Bientôt disponible."
+  hideScrollTop
+>
+  <main>
+    <ComingSoon>
+      <Fragment slot="title">Ça arrive <span class="text-orange-600">bientôt</span></Fragment>
+      Les repas d'équipe, on s'en occupe. Bientôt.
+    </ComingSoon>
+  </main>
+</BaseLayout>
