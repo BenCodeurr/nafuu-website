@@ -1,87 +1,114 @@
-# Nafuu website
+# Site web Nafuu
 
-Source of [nafuudelivery.com](https://nafuudelivery.com), the marketing site of **Nafuu**, a food-delivery app in Bunia (Ituri, DR Congo).
+Code source de [nafuudelivery.com](https://nafuudelivery.com), le site vitrine actuel de **Nafuu**.
 
-It is a static site built with [Astro](https://astro.build): every page is prerendered to HTML for fast loads and good SEO, with a little vanilla JS for menus and animations and one React island (the live-delivery demo on the homepage).
+**L’objectif de ce dépôt : un nouveau site web.** Celui-ci sert de base. On cherche une nouvelle interface, plus claire et plus agréable. Voir [CONTRIBUTING.md](CONTRIBUTING.md).
 
-> **The dashboards are not here.** The restaurant/partner dashboard and onboarding live at
-> [app.nafuudelivery.com](https://app.nafuudelivery.com) and the admin dashboard at admin.nafuudelivery.com.
-> Both are in a separate, private repository. This site holds no API keys, no backend client and no auth;
-> it only links to those apps.
+## Qu’est-ce que Nafuu ?
 
-## Getting started
+**Nafuu** (« abordable » en swahili) est une application de livraison de repas. Elle relie trois groupes de personnes :
 
-Requires Node.js 20+ (22 LTS recommended).
+- les **clients**, qui commandent un plat et le suivent jusqu’à chez eux ;
+- les **restaurants**, qui reçoivent des commandes et suivent leurs ventes ;
+- les **livreurs**, qui récupèrent les commandes et les portent.
+
+L’application est sur [l’App Store](https://apps.apple.com/app/nafuu-livraison-des-repas/id6781988366) et [Google Play](https://play.google.com/store/apps/details?id=com.nafuu.nafuu). Nafuu est un projet de **GSWORLD**.
+
+Ce dépôt n’est **pas** l’application. C’est seulement le site web : expliquer le service, faire télécharger l’app, recruter des partenaires, et montrer les pages légales.
+
+## Qu’est-ce que ce site ?
+
+Un site **statique** en français, fait avec [Astro](https://astro.build). Chaque page est déjà du HTML. Il n’y a pas de compte, pas d’API, pas de base de données et **aucun mot de passe ni clé à cacher**.
+
+Le JavaScript est léger : menus, animations au scroll, et un petit composant React sur la page d’accueil (une démo de suivi de livraison, sans GPS réel).
+
+> **Les tableaux de bord ne sont pas ici.** Les restaurants et les livreurs se connectent sur [app.nafuudelivery.com](https://app.nafuudelivery.com). L’équipe interne utilise admin.nafuudelivery.com. Ces apps sont dans un autre dépôt, privé. Ce site n’a aucune clé API. Il fait seulement des liens vers ces apps.
+
+Le nouveau site doit faire la même chose : un site vitrine, pas une app.
+
+### Qui vient sur le site ?
+
+Le nouveau site doit parler à ces mêmes personnes :
+
+| Public | Ce qu’il cherche | Pages aujourd’hui |
+| --- | --- | --- |
+| Clients | Télécharger l’app, comprendre le service | `/`, `/talk-to-us` |
+| Restaurants | S’inscrire, ouvrir l’espace partenaire | `/restaurant` → `app.nafuudelivery.com` |
+| Livreurs | Devenir livreur | `/rider` → `app.nafuudelivery.com` |
+| Entreprises | Offre repas d’équipe (pas encore lancée) | `/entreprises` |
+| Presse, candidats, partenaires | Histoire, valeurs, contact | `/about`, `/careers`, `/talk-to-us` |
+| Utilisateurs de l’app | Règles, vie privée, suppression de compte | `/terms`, `/privacy`, `/delete-account` |
+
+### Pages à garder (le contenu, pas le design)
+
+Vous pouvez tout redessiner. Ces pages (ou leur équivalent) doivent rester, avec les **mêmes adresses** :
+
+| URL | Rôle |
+| --- | --- |
+| `/` | Accueil : donner envie, expliquer le service, boutons pour télécharger l’app, partenaires |
+| `/rider` | Devenir livreur |
+| `/restaurant` | Inscrire un restaurant |
+| `/entreprises` | Nafuu Entreprises — pour l’instant une page « bientôt » |
+| `/about` | Histoire de Nafuu / GSWORLD, clients, restaurants, livreurs, tech, valeurs |
+| `/careers` | Carrières — pour l’instant une page « bientôt » |
+| `/talk-to-us` | Contact : WhatsApp, email, adresse |
+| `/terms` | Conditions d’utilisation |
+| `/privacy` | Politique de confidentialité |
+| `/delete-account` | Demande de suppression de compte. **L’App Store et Google Play pointent vers cette adresse exacte. Ne la changez pas.** |
+| `/404` | Page introuvable |
+
+Les liens (stores, réseaux, WhatsApp, tableaux de bord) sont dans [`src/data/site.ts`](src/data/site.ts). Changez une URL là, pas dans chaque page.
+
+## Démarrage
+
+Il faut Node.js 20+ (22 LTS recommandé).
 
 ```bash
 npm install
-npm run dev       # http://localhost:4321 with hot reload
-npm run build     # static output in dist/
-npm run preview   # serve dist/ locally
+npm run dev       # http://localhost:4321
+npm run build     # crée le site dans dist/
+npm run preview   # montre dist/ en local
 ```
 
-No environment variables are needed.
+Pas de fichier `.env`. Si `npm run build` échoue, le travail n’est pas fini.
 
-## Project layout
+## Structure du projet actuel
+
+Ceci décrit le site d’aujourd’hui. Le nouveau site n’est pas obligé de garder les mêmes fichiers.
 
 ```
 src/
-  pages/            one .astro file per route (/, /rider, /restaurant, /about, /delete-account, ...)
-  layouts/          BaseLayout (meta, Open Graph, JSON-LD, fonts) and LegalLayout
+  pages/            une page = un fichier .astro (voir le tableau ci-dessus)
+  layouts/          BaseLayout (titre, image de partage, polices) et LegalLayout
   components/
-    layout/         Navbar, Footer
-    sections/       homepage sections (Hero, CravingsSection, EasyDelivery, PartnerSections)
-    ui/             small shared pieces (store buttons, brand icons, ...)
-  data/site.ts      links (app stores, socials, dashboard URLs) and contact details
-  scripts/ui.ts     scroll-reveal and navbar scroll state
-  styles/global.css Tailwind v4 entry and design tokens
-  assets/images/    photos, optimised to WebP at build time by astro:assets
-public/             files served as-is (logos, favicon, OG image, robots.txt, sw.js)
-vercel.json         redirects from old dashboard URLs, cache headers
+    layout/         barre du haut (Navbar), pied de page (Footer)
+    sections/       blocs de la page d’accueil
+    ui/             petits éléments (boutons stores, icônes, ComingSoon, ...)
+  data/site.ts      liens et coordonnées
+  scripts/ui.ts     animations au scroll et menu
+  styles/global.css couleurs et styles (Tailwind)
+  assets/images/    photos (converties en WebP au build)
+public/             logos, favicon, image de partage, robots.txt, sw.js
+vercel.json         anciennes adresses renvoyées vers les apps, cache
 ```
 
-- **Styling:** Tailwind CSS v4 (via `@tailwindcss/vite`). Brand orange is Tailwind's `orange-600` plus the `.gradient-primary` class.
-- **Icons:** Font Awesome 6 icons are inlined as SVG with [astro-icon](https://github.com/natemoo-re/astro-icon). To use a new one, add its name to the `include` list in `astro.config.mjs` and write `<Icon name="fa6-solid:name" />`.
-- **Fonts:** Inter is self-hosted through `@fontsource-variable/inter` (no Google Fonts request).
-- **SEO:** each page passes its own `title` and `description` to `BaseLayout`, which adds the canonical URL, Open Graph and Twitter tags. The sitemap is generated by `@astrojs/sitemap`; the homepage carries the Organization, MobileApplication and LocalBusiness JSON-LD.
+- **Couleurs actuelles :** Tailwind CSS v4. Orange de marque : `orange-600` et `.gradient-primary` (`#ff6b00` → `#ff8f00`). Police : Inter, déjà dans le projet (pas Google Fonts).
+- **Icônes :** Font Awesome 6, en SVG. Pour en ajouter une sur ce site-ci, mettez son nom dans `astro.config.mjs` puis `<Icon name="fa6-solid:name" />`.
+- **Référencement :** chaque page a son propre titre et sa description. Un sitemap est créé au build. La page d’accueil décrit l’entreprise et l’app pour Google. Langue : français. Le nouveau site doit aussi avoir un titre et une description par page.
+- **Sans JavaScript :** le site doit encore se lire. Les liens et les menus importants doivent être dans le HTML. Si quelqu’un a demandé moins d’animation (`prefers-reduced-motion`), respectez-le.
 
-## Deployment
+## Mise en ligne
 
-The site deploys to Vercel as a static Astro project (`vercel.json`). It also handles the move away from the old all-in-one app:
+Le site part sur Vercel. C’est un site HTML, pas un serveur.
 
-- **Redirects (301):** `/dashboard/*`, `/restaurant-onboarding`, `/rider-onboarding` and `/restaurant-selection` go to the same path on `app.nafuudelivery.com`; `/admin/*` and `/oauth/authorize` go to the same path on `admin.nafuudelivery.com`. Vercel keeps the query string on redirects.
-- **`/delete-account` stays on this site:** the App Store and Google Play listings link to that exact URL, so do not move or rename it.
-- **Service-worker kill switch:** the old site installed a PWA service worker at `/sw.js`. `public/sw.js` replaces it: when a returning visitor's browser picks it up, it deletes every cache, unregisters itself and reloads open tabs once. `public/registerSW.js` is an empty no-op that replaces the old registration script, which cached pages of the old app may still request. Keep both files deployed for several months.
+Avant, tout (site + apps) était au même endroit. Le nouveau site doit garder ça :
 
-## Contributing
+- **Anciennes adresses** : `/dashboard/*`, `/restaurant-onboarding`, `/rider-onboarding` et `/restaurant-selection` vont vers `app.nafuudelivery.com`. `/admin/*` et `/oauth/authorize` vont vers `admin.nafuudelivery.com`.
+- **`/delete-account` reste ici.**
+- **Ancien site enregistré sur le téléphone :** `public/sw.js` le désinstalle (vide le cache, se retire, recharge la page). `public/registerSW.js` est un fichier vide à la place de l’ancien script. Laissez les deux en ligne encore plusieurs mois.
 
-Issues and pull requests are welcome, for typos and translations as much as code.
+## Licence
 
-1. Fork the repo and create a branch.
-2. `npm install && npm run dev`, make your change.
-3. Run `npm run build` and check that it passes.
-4. Open a pull request describing what changed and why. Include a screenshot for visual changes.
+Le code est sous [licence MIT](LICENSE).
 
-Please keep the site static and free of secrets: no API keys, backend clients or tracking scripts without discussion first. Site copy is in French.
-
-## License
-
-The code is released under the [MIT License](LICENSE).
-
-The Nafuu name, logo and brand assets, and the photos in `src/assets/images` and `public/images`, are **not** covered by the MIT license; they belong to Nafuu / GSWORLD and may not be reused without permission.
-
-### Images to confirm before publishing
-
-All images were carried over from the previous site. The owner should confirm Nafuu has the right to publish each one in a public repository (not only on the website):
-
-| File | What it shows | Check |
-| --- | --- | --- |
-| `src/assets/images/ben_mk.jpg` | Photo of co-founder Ben Mukanirwa | consent to publish in the repo |
-| `src/assets/images/pizza.jpg` | Homepage hero food photo | stock licence / photographer |
-| `src/assets/images/food-image-1.avif` … `food-image-7.avif` | Food photos (homepage carousel) | stock licence / photographer |
-| `src/assets/images/restaurant_img.avif`, `resto.avif` | Restaurant interiors | stock licence; identifiable venue? |
-| `src/assets/images/new-order.avif` | Food preparation photo | stock licence |
-| `src/assets/images/delivery_person.png`, `delivery_rider.png` | Rider illustrations | who made them / licence (AI or commissioned?) |
-| `src/assets/images/consommateur.png`, `tech.png`, `wide-customer.png` | About / restaurant page visuals | who made them / licence |
-| `src/assets/images/dashboard.png`, `delivery-dash.png` | Screenshots of the restaurant dashboard | show real-looking data ("Muka Restaurant", orders under the founder's name); confirm it is test data |
-| `public/images/og-image.jpg` | Social share image | licence of any photo used in it |
+Le nom Nafuu, le logo, la marque, et les photos dans `src/assets/images` et `public/images` **ne sont pas** sous MIT. Ils appartiennent à Nafuu / GSWORLD. Il faut une autorisation pour les réutiliser.
