@@ -14,7 +14,7 @@ Le nouveau site doit rester un **site vitrine statique** : des pages HTML, pas u
 
 Vous ne construisez pas l’app de livraison. Vous ne construisez pas l’espace restaurant ni l’admin. Ces apps existent déjà. Le site doit seulement y faire des liens.
 
-Les adresses des pages, les redirections, `/delete-account`, les deux fichiers `sw.js` / `registerSW.js`, et l’absence de secrets restent obligatoires. Le reste, vous pouvez le réinventer.
+Les adresses des pages, `/delete-account`, et l’absence de secrets restent obligatoires. Le reste, vous pouvez le réinventer.
 
 ## Ce qui ne doit pas changer
 
@@ -22,10 +22,8 @@ Les adresses des pages, les redirections, `/delete-account`, les deux fichiers `
 2. **Aucun secret.** Pas de clés, de tokens, de fichier `.env` avec des mots de passe, ni d’outil de suivi (analytics) sans accord de l’équipe Nafuu.
 3. **Les textes du site sont en français.** Sur l’accueil, quelques phrases dans d’autres langues (« Tu as faim ? », « Uko njala ? », etc.) sont voulues. Le reste reste en français.
 4. **Les adresses des pages ne bougent pas**, surtout `/delete-account`. L’App Store et Google Play y pointent. Si vous déplacez une page, ajoutez une redirection dans `vercel.json`.
-5. **Les anciennes adresses vers les apps restent.** `/dashboard/*`, `/restaurant-onboarding`, `/rider-onboarding`, `/restaurant-selection` → `app.nafuudelivery.com`. `/admin/*` et `/oauth/authorize` → `admin.nafuudelivery.com`.
-6. **Laissez `public/sw.js` et `public/registerSW.js`.** Ils désinstallent l’ancien site sur le téléphone des visiteurs. Ne les enlevez pas pour « faire plus propre ».
-7. **La marque.** Le nom Nafuu, les logos et les photos appartiennent à Nafuu / GSWORLD. Ne les utilisez pas ailleurs. Sur le nouveau site, gardez l’orange (`#ff6b00`) et les logos du dépôt, sauf si l’équipe vous donne un nouveau kit.
-8. **Les liens** (stores, WhatsApp, email, réseaux, `app.` / `admin.`) sont dans `src/data/site.ts` aujourd’hui. Gardez une seule liste de liens, pas les mêmes URL copiées partout.
+5. **La marque.** Le nom Nafuu, les logos et les photos appartiennent à Nafuu / GSWORLD. Ne les utilisez pas ailleurs. Sur le nouveau site, gardez l’orange (`#ff6b00`) et les logos du dépôt, sauf si l’équipe vous donne un nouveau kit.
+6. **Les liens** (stores, WhatsApp, email, réseaux, `app.` / `admin.`) sont dans `src/data/site.ts` aujourd’hui. Gardez une seule liste de liens, pas les mêmes URL copiées partout.
 
 ## Comment travailler
 
@@ -41,7 +39,7 @@ Les adresses des pages, les redirections, `/delete-account`, les deux fichiers `
 - **Votre intention.** En une phrase : ce que le nouveau site fait mieux.
 - **Des images.** Accueil et une ou deux autres pages, sur téléphone et sur ordinateur.
 - **Les pages que vous avez refaites.** Dites si toutes les pages du README sont encore là, aux mêmes adresses.
-- **Ce que vous n’avez pas touché** si c’est important (`/delete-account`, `vercel.json`, `sw.js`…).
+- **Ce que vous n’avez pas touché** si c’est important (`/delete-account`, par exemple).
 
 Une idée partielle (une page, un nouveau hero) est acceptée. L’idéal, c’est une proposition de site complet.
 

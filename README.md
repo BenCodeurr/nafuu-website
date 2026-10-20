@@ -88,8 +88,8 @@ src/
   scripts/ui.ts     animations au scroll et menu
   styles/global.css couleurs et styles (Tailwind)
   assets/images/    photos (converties en WebP au build)
-public/             logos, favicon, image de partage, robots.txt, sw.js
-vercel.json         anciennes adresses renvoyées vers les apps, cache
+public/             logos, favicon, image de partage, robots.txt
+vercel.json         déploiement Vercel
 ```
 
 - **Couleurs actuelles :** Tailwind CSS v4. Orange de marque : `orange-600` et `.gradient-primary` (`#ff6b00` → `#ff8f00`). Police : Inter, déjà dans le projet (pas Google Fonts).
@@ -99,13 +99,7 @@ vercel.json         anciennes adresses renvoyées vers les apps, cache
 
 ## Mise en ligne
 
-Le site part sur Vercel. C’est un site HTML, pas un serveur.
-
-Avant, tout (site + apps) était au même endroit. Le nouveau site doit garder ça :
-
-- **Anciennes adresses** : `/dashboard/*`, `/restaurant-onboarding`, `/rider-onboarding` et `/restaurant-selection` vont vers `app.nafuudelivery.com`. `/admin/*` et `/oauth/authorize` vont vers `admin.nafuudelivery.com`.
-- **`/delete-account` reste ici.**
-- **Ancien site enregistré sur le téléphone :** `public/sw.js` le désinstalle (vide le cache, se retire, recharge la page). `public/registerSW.js` est un fichier vide à la place de l’ancien script. Laissez les deux en ligne encore plusieurs mois.
+Le site part sur Vercel. C’est un site HTML, pas un serveur. La page `/delete-account` doit rester à cette adresse.
 
 ## Licence
 
